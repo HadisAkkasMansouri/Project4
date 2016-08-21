@@ -1,0 +1,87 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>AddLegalCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.AddLegalCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRealCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.AddRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRealCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.DeleteRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteLegalCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.DeleteLegalCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateLegalCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.UpdateLegalCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRealCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.UpdateRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchRealCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.SearchRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchLegalCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.SearchLegalCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveChangesRealCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.SaveChangesRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveChangesLegalCustomerServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.SaveChangesLegalCustomerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddLegalCustomerServlet</servlet-name>
+        <url-pattern>/AddLegalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRealCustomerServlet</servlet-name>
+        <url-pattern>/AddRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRealCustomerServlet</servlet-name>
+        <url-pattern>/DeleteRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteLegalCustomerServlet</servlet-name>
+        <url-pattern>/DeleteLegalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateLegalCustomerServlet</servlet-name>
+        <url-pattern>/UpdateLegalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRealCustomerServlet</servlet-name>
+        <url-pattern>/UpdateRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchRealCustomerServlet</servlet-name>
+        <url-pattern>/SearchRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchLegalCustomerServlet</servlet-name>
+        <url-pattern>/SearchLegalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveChangesLegalCustomerServlet</servlet-name>
+        <url-pattern>/SaveChangesLegalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveChangesRealCustomerServlet</servlet-name>
+        <url-pattern>/SaveChangesRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -5,6 +5,7 @@ import ir.dotin.utility.SessionConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import javax.persistence.Query;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,12 +19,12 @@ public class CustomerDAO {
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         int id = retrieveMaxId();
-        try{
+        try {
             transaction = session.beginTransaction();
             Customer customer = new Customer(id, customerNumber);
             id = (Integer) session.save(customer);
             transaction.commit();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
                 e.printStackTrace();
@@ -61,7 +62,6 @@ public class CustomerDAO {
         return customerNumber;
     }
 
-
     public static boolean deleteCustomer(int id) {
 
         Session session = SessionConnection.getSessionConnection().openSession();
@@ -82,7 +82,6 @@ public class CustomerDAO {
         }
         return true;
     }
-
 
     public static int retrieveMaxId() {
 
@@ -115,17 +114,17 @@ public class CustomerDAO {
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         String customerNumber = null;
-        try{
+        try {
             transaction = session.beginTransaction();
             Query query = session.createQuery("select c.customerNumber from Customer c where c.id= :id");
             System.out.println(query);
             query.setParameter("id", id);
             Object result = query.getSingleResult();
-            if((String)result != null){
-              customerNumber = (String) result;
+            if ((String) result != null) {
+                customerNumber = (String) result;
             }
             transaction.commit();
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
                 e.printStackTrace();
@@ -134,24 +133,24 @@ public class CustomerDAO {
             session.close();
         }
         return customerNumber;
-        }
+    }
 
     public static int retrieveIdByCustomerNumber(String customerNumber) {
 
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         int id = 0;
-        try{
+        try {
             transaction = session.beginTransaction();
             Query query = session.createQuery("select c.id from Customer where customerNumber= :customerNumber");
             System.out.println(query);
             query.setParameter("customerNumber", customerNumber);
             Object result = query.getSingleResult();
-            if((Integer)result != 0){
-              id = (Integer) result;
+            if ((Integer) result != 0) {
+                id = (Integer) result;
             }
             transaction.commit();
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
                 e.printStackTrace();

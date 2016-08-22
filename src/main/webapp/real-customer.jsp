@@ -75,7 +75,7 @@
             <a href="add-real-customer.jsp">اضافه کردن کاربر</a>
             <br>
             <br>
-            <a href="search-real-customer.jsp">تسهیلات</a>
+            <a href="loan.jsp">تسهیلات</a>
             <br>
             <br>
             <br>

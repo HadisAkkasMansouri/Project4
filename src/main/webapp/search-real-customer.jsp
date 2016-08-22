@@ -32,11 +32,10 @@
         .style {
             font-weight: bold;
             position: absolute;
-            left: 90px;
-            bottom: 150px;
+            left: 5%;
+            bottom: 15%;
             z-index: -1;
         }
-
     </style>
 </head>
 <body>

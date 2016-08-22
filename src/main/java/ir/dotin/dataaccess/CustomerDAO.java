@@ -1,8 +1,11 @@
 package ir.dotin.dataaccess;
 
+import ir.dotin.utility.SessionConnection;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import javax.persistence.Query;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerDAO {
@@ -11,108 +14,158 @@ public class CustomerDAO {
 
     public static int addCustomer(String customerNumber) throws SQLException {
 
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
         int id = retrieveMaxId();
-        connection = SingleConnection.getConnection();
-        String query = "INSERT INTO CUSTOMER(ID, CUSTOMER_NUMBER) values (?, ?);";
-        System.out.println(query);
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, id);
-        preparedStatement.setString(2, customerNumber);
-        preparedStatement.executeUpdate();
+        try{
+            transaction = session.beginTransaction();
+//            Query query = session.createQuery("insert into Customer c(c.id, c.customerNumber)");
+
+
+            transaction.commit();
+        }catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
+        }
         return id;
     }
 
+
+//        String query = "INSERT INTO CUSTOMER(ID, CUSTOMER_NUMBER) values (?, ?);";
+//        PreparedStatement preparedStatement = connection.prepareStatement(query);
+//        preparedStatement.setInt(1, id);
+//        preparedStatement.setString(2, customerNumber);
+//        preparedStatement.executeUpdate();
+//
+
     public static int retrieveMaxCustomerNumber() {
 
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
         int customerNumber = 0;
         try {
-            connection = SingleConnection.getConnection();
-            String query = "SELECT MAX(CUSTOMER_NUMBER) FROM CUSTOMER;";
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("select max(c.customerNumber) from Customer c");
             System.out.println(query);
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            if (resultSet.getInt(1) != 0) {
-                customerNumber = resultSet.getInt(1) + 1;
+            Object result = query.getSingleResult();
+            transaction.commit();
+            if ((Integer) result != 0) {
+                customerNumber++;
             } else {
                 customerNumber = 10000;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
         }
         return customerNumber;
     }
 
+
     public static boolean deleteCustomer(int id) {
 
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
         try {
-            String query = "DELETE FROM CUSTOMER WHERE ID = ?;";
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("delete from Customer c where c.id= :id");
             System.out.println(query);
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            query.setParameter("id", id);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
         }
         return true;
     }
 
+
     public static int retrieveMaxId() {
 
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
         int id = 0;
         try {
-            connection = SingleConnection.getConnection();
-            String query = "SELECT MAX(ID) FROM CUSTOMER;";
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("select max(c.id) from Customer c");
             System.out.println(query);
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            if (resultSet.getInt(1) != 0) {
-                id = resultSet.getInt(1) + 1;
+            Object result = query.getSingleResult();
+            if ((Integer) result != 0) {
+                id++;
             } else {
                 id = 1;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
         }
         return id;
     }
 
     public static String retrieveCustomerNumberById(int id) {
 
-        PreparedStatement preparedStatement;
-        connection = SingleConnection.getConnection();
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
         String customerNumber = null;
-        try {
-            String query = "SELECT (CUSTOMER_NUMBER) FROM CUSTOMER WHERE ID = ?;";
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("select c.customerNumber from Customer c where c.id= :id");
             System.out.println(query);
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                customerNumber = String.valueOf(resultSet.getInt(1));
+            query.setParameter("id", id);
+            Object result = query.getSingleResult();
+            if((String)result != null){
+              customerNumber = (String) result;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            transaction.commit();
+        }catch(HibernateException e){
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
         }
         return customerNumber;
-    }
+        }
 
     public static int retrieveIdByCustomerNumber(String customerNumber) {
 
-        connection = SingleConnection.getConnection();
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
         int id = 0;
-        try {
-            String query = "SELECT (ID) FROM CUSTOMER WHERE CUSTOMER_NUMBER = ?;";
+        try{
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("select c.id from Customer where customerNumber= :customerNumber");
             System.out.println(query);
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, customerNumber);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                id = resultSet.getInt(1);
+            query.setParameter("customerNumber", customerNumber);
+            Object result = query.getSingleResult();
+            if((Integer)result != 0){
+              id = (Integer) result;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            transaction.commit();
+        }catch(HibernateException e){
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
         }
         return id;
     }

@@ -1,5 +1,6 @@
 package ir.dotin.dataaccess;
 
+import ir.dotin.dataaccess.entity.Customer;
 import ir.dotin.utility.SessionConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -19,9 +20,8 @@ public class CustomerDAO {
         int id = retrieveMaxId();
         try{
             transaction = session.beginTransaction();
-//            Query query = session.createQuery("insert into Customer c(c.id, c.customerNumber)");
-
-
+            Customer customer = new Customer(id, customerNumber);
+            id = (Integer) session.save(customer);
             transaction.commit();
         }catch (HibernateException e) {
             if (transaction != null) {
@@ -33,14 +33,6 @@ public class CustomerDAO {
         }
         return id;
     }
-
-
-//        String query = "INSERT INTO CUSTOMER(ID, CUSTOMER_NUMBER) values (?, ?);";
-//        PreparedStatement preparedStatement = connection.prepareStatement(query);
-//        preparedStatement.setInt(1, id);
-//        preparedStatement.setString(2, customerNumber);
-//        preparedStatement.executeUpdate();
-//
 
     public static int retrieveMaxCustomerNumber() {
 

@@ -14,7 +14,7 @@ public class CustomerDAO {
 
     static Connection connection = null;
 
-    public static int addCustomer(String customerNumber) throws SQLException {
+    public static int addCustomer(String customerNumber){
 
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;

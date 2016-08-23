@@ -25,6 +25,16 @@ public class RealCustomer extends Customer {
     @Column(name = "national_code", unique = true, nullable = false)
     private String  nationalCode;
 
+    public RealCustomer(int id, String name, String familyName, String fatherName, String birthDate, String nationalCode){
+
+        this.id = id;
+        this.name = name;
+        this.familyName = familyName;
+        this.familyName = familyName;
+        this.birthDate = birthDate;
+        this.nationalCode = nationalCode;
+    }
+
     public String getName() {
         return name;
     }

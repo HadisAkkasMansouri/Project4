@@ -1,6 +1,5 @@
 package ir.dotin.dataaccess;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import ir.dotin.dataaccess.entity.Customer;
 import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
@@ -43,7 +42,33 @@ public class RealCustomerDAO extends Customer {
 
     public RealCustomer addRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode) throws DuplicateEntranceException {
 
-
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
+        RealCustomer realCustomer = null;
+        try{
+            int customerNum = CustomerDAO.retrieveMaxCustomerNumber();
+            String customerNumber = String.valueOf(customerNum);
+            int id = CustomerDAO.addCustomer(customerNumber);
+            if (checkUniqueRealNationalCode(nationalCode)) {
+                realCustomer = new RealCustomer(id, name, familyName, fatherName, birthDate, nationalCode);
+                realCustomer = (RealCustomer) session.save(realCustomer);
+                transaction.commit();
+                realCustomer.setName(name);
+                realCustomer.setFamilyName(familyName);
+                realCustomer.setFatherName(fatherName);
+                realCustomer.setBirthDate(birthDate);
+                realCustomer.setNationalCode(nationalCode);
+                realCustomer.setCustomerNumber(customerNumber);
+            }
+        }catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        } finally {
+            session.close();
+        }
+        return realCustomer;
     }
 
     public boolean deleteRealCustomer(int id) {

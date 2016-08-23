@@ -80,6 +80,7 @@ public class RealCustomerDAO extends Customer {
                 System.out.println(query);
                 query.setParameter("id", id);
                 query.executeUpdate();
+                transaction.commit();
             }
         }catch (HibernateException e){
             if(transaction != null){
@@ -143,6 +144,7 @@ public class RealCustomerDAO extends Customer {
         try{
             Query query = buildRealCustomerQuery(name, familyName, nationalCode, customerNumber);
             List result = query.getResultList();
+            transaction.commit();
             while (result != null){
 //                realCustomer.setId((Integer)result.);
 //                realCustomer.setName();
@@ -179,6 +181,7 @@ public class RealCustomerDAO extends Customer {
             query.setParameter("nationalCode", nationalCode);
             query.setParameter("id", id);
             query.executeUpdate();
+            transaction.commit();
 
             realCustomer.setId(id);
             realCustomer.setName(name);
@@ -208,6 +211,7 @@ public class RealCustomerDAO extends Customer {
             query.setParameter("id", id);
             Object result = query.getFirstResult();
             realCustomer = (RealCustomer) result;
+            transaction.commit();
             while (result != null){
 //                realCustomer.setId(result.getInt("ID"));
 //                realCustomer.setName(result.getString("NAME"));

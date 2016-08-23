@@ -5,7 +5,8 @@ import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class CustomerRealValidation {
 
@@ -64,12 +65,12 @@ public class CustomerRealValidation {
         }
     }
 
-//    public static List<RealCustomer> searchRealCustomer(String name, String familyName, String nationalCode, String realCustomerNumber) {
-//
-//        RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
-//        List<RealCustomer> realCustomers = realCustomerDAO.searchRealCustomer(name, familyName, nationalCode, realCustomerNumber);
-//        return realCustomers;
-//    }
+    public static List<RealCustomer> searchRealCustomer(String name, String familyName, String nationalCode, String realCustomerNumber) {
+
+        RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
+        List<RealCustomer> realCustomers = realCustomerDAO.searchRealCustomer(name, familyName, nationalCode, realCustomerNumber);
+        return realCustomers;
+    }
 
     public static RealCustomer getRealCustomer(int id) {
 

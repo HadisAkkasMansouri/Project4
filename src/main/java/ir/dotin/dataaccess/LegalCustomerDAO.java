@@ -23,6 +23,7 @@ public class LegalCustomerDAO {
             System.out.println(query);
             query.setParameter("economicCode", economicCode);
             Object result = query.getSingleResult();
+            transaction.commit();
             if (result != null) {
                 throw new DuplicateEntranceException("کد اقتصادی وارد شده یکتا نیست٬ لطفا مجددا تلاش نمایید");
             }
@@ -75,6 +76,7 @@ public class LegalCustomerDAO {
                 Query query = session.createQuery("delete from  LegalCustomer lc where id= :id");
                 query.setParameter("id", id);
                 query.executeUpdate();
+                transaction.commit();
             }
         } catch (HibernateException e) {
             if (transaction != null) {
@@ -134,6 +136,7 @@ public class LegalCustomerDAO {
         try {
             Query query = buildLegalCustomerQuery(companyName, economicCode, legalCustomerNumber);
             List result = query.getResultList();
+            transaction.commit();
             while (result != null) {
 //                legalCustomer.setId(results.getInt("ID"));
 //                legalCustomer.setCustomerNumber(CustomerDAO.retrieveCustomerNumberById(results.getInt("ID")));
@@ -153,6 +156,38 @@ public class LegalCustomerDAO {
         return legalCustomers;
     }
 
+    public LegalCustomer updateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber){
+
+        int id = CustomerDAO.retrieveIdByCustomerNumber(customerNumber);
+        Session session = SessionConnection.getSessionConnection().openSession();
+        Transaction transaction = null;
+        try{
+            Query query = session.createQuery("update LegalCustomer lc set lc.companyName= :companyName, lc.economicCode= :economicCode, lc.registrationDate= : registrationDate" +
+                    " where lc.id= :id");
+            query.setParameter("companyName", companyName);
+            query.setParameter("economicCode", economicCode);
+            query.setParameter("registrationDate", registrationDate);
+            query.setParameter("id", id);
+            query.executeUpdate();
+            transaction.commit();
+
+            legalCustomer.setId(id);
+            legalCustomer.setCompanyName(companyName);
+            legalCustomer.setEconomicCode(economicCode);
+            legalCustomer.setRegistrationDate(registrationDate);
+            legalCustomer.setCustomerNumber(customerNumber);
+        }catch (HibernateException e){
+            if(transaction != null){
+                transaction.rollback();
+                e.printStackTrace();
+            }
+        }finally {
+            session.close();
+        }
+        return legalCustomer;
+    }
+
+
     public LegalCustomer getLegalCustomer(int id) {
 
         String customerNumber = CustomerDAO.retrieveCustomerNumberById(id);
@@ -162,6 +197,7 @@ public class LegalCustomerDAO {
             Query query = session.createQuery("select from LegalCustomer lc where id= :id");
             query.setParameter("id", id);
             Object result = query.getFirstResult();
+            transaction.commit();
 //            legalCustomer.setId(result.getInt("ID"));
 //            legalCustomer.setCompanyName(result.getString("COMPANY_NAME"));
 //            legalCustomer.setEconomicCode(result.getString("ECONOMIC_CODE"));

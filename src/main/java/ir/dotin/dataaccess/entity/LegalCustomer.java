@@ -4,9 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "legal_customer")
+//@AttributeOverrides({
+//        @AttributeOverride(name = "id", column = @Column(name = "id"))
+//})
 public class LegalCustomer extends Customer {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -18,6 +22,15 @@ public class LegalCustomer extends Customer {
 
     @Column(name = "economic_code", unique = true, nullable = false)
     private String economicCode;
+
+    public LegalCustomer(){}
+
+    public LegalCustomer(int id, String companyName, String registrationDate, String economicCode){
+        this.id = id;
+        this.companyName = companyName;
+        this.registrationDate = registrationDate;
+        this.economicCode = economicCode;
+    }
 
     public String getCompanyName() {
         return companyName;

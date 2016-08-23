@@ -5,7 +5,6 @@ import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
-
 import java.util.List;
 
 public class CustomerRealValidation {

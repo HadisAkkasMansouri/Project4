@@ -51,13 +51,8 @@ public class RealCustomerDAO extends Customer {
             if (checkUniqueRealNationalCode(nationalCode)) {
                 realCustomer = new RealCustomer(id, name, familyName, fatherName, birthDate, nationalCode);
                 realCustomer = (RealCustomer) session.save(realCustomer);
-                transaction.commit();
-                realCustomer.setName(name);
-                realCustomer.setFamilyName(familyName);
-                realCustomer.setFatherName(fatherName);
-                realCustomer.setBirthDate(birthDate);
-                realCustomer.setNationalCode(nationalCode);
                 realCustomer.setCustomerNumber(customerNumber);
+                transaction.commit();
             }
         }catch (HibernateException e) {
             if (transaction != null) {
@@ -101,21 +96,21 @@ public class RealCustomerDAO extends Customer {
         Transaction transaction = null;
         Query query = null;
         int counter = 1;
-        StringBuilder queryString = new StringBuilder("select rc from RealCustomer rc ");
+        StringBuilder queryString = new StringBuilder("from RealCustomer rc, Customer c where rc.id = c.id and ");
         List<String> parameters = new ArrayList<String>();
         if((customerNumber != null) && (!customerNumber.trim().equals(""))){
-            queryString.append("c.customer.customerNumber= :customerNumber");
+            queryString.append("c.customer.customerNumber= :customerNumber and ");
             parameters.add(customerNumber);
         }
         if((name != null) && (!name.trim().equals(""))){
-            queryString.append("rc.name= :name");
+            queryString.append("rc.name= :name and");
             parameters.add(name);
         }
         if((familyName != null) && (!familyName.trim().equals(""))){
-            queryString.append("rc.familyName= :familyName");
+            queryString.append("rc.familyName= :familyName and");
             parameters.add(familyName);
         }if((nationalCode != null) && (!nationalCode.trim().equals(""))){
-            queryString.append("rc.nationalCode= :nationalCode");
+            queryString.append("rc.nationalCode= :nationalCode and");
             parameters.add(nationalCode);
         }
         queryString.append("true");
@@ -146,13 +141,13 @@ public class RealCustomerDAO extends Customer {
             List result = query.getResultList();
             transaction.commit();
             while (result != null){
-//                realCustomer.setId((Integer)result.);
-//                realCustomer.setName();
-//                realCustomer.setFamilyName();
-//                realCustomer.setFatherName();
-//                realCustomer.setBirthDate();
-//                realCustomer.setNationalCode();
-//                realCustomer.setCustomerNumber(CustomerDAO.retrieveCustomerNumberById((result.get()));
+                realCustomer.getId();
+                realCustomer.getName();
+                realCustomer.getFamilyName();
+                realCustomer.getFatherName();
+                realCustomer.getBirthDate();
+                realCustomer.getBirthDate();
+                realCustomer.getCustomerNumber();
                 realCustomers.add(realCustomer);
             }
         }catch(HibernateException e){
@@ -183,13 +178,13 @@ public class RealCustomerDAO extends Customer {
             query.executeUpdate();
             transaction.commit();
 
-            realCustomer.setId(id);
-            realCustomer.setName(name);
-            realCustomer.setFamilyName(familyName);
-            realCustomer.setFatherName(fatherName);
-            realCustomer.setBirthDate(birthDate);
-            realCustomer.setNationalCode(nationalCode);
-            realCustomer.setCustomerNumber(customerNumber);
+            realCustomer.getId();
+            realCustomer.getName();
+            realCustomer.getFamilyName();
+            realCustomer.getFatherName();
+            realCustomer.getBirthDate();
+            realCustomer.getNationalCode();
+            realCustomer.getCustomerNumber();
         }catch (HibernateException e){
             if(transaction != null){
                 transaction.rollback();
@@ -207,19 +202,19 @@ public class RealCustomerDAO extends Customer {
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try{
-            Query query = session.createQuery("select from RealCustomer rc where rc.id= :id");
+            Query query = session.createQuery("from RealCustomer rc where rc.id= :id");
             query.setParameter("id", id);
             Object result = query.getFirstResult();
             realCustomer = (RealCustomer) result;
             transaction.commit();
             while (result != null){
-//                realCustomer.setId(result.getInt("ID"));
-//                realCustomer.setName(result.getString("NAME"));
-//                realCustomer.setFamilyName(result.getString("FAMILY_NAME"));
-//                realCustomer.setFatherName(result.getString("FATHER_NAME"));
-//                realCustomer.setBirthDate(result.getString("BIRTH_DATE"));
-//                realCustomer.setNationalCode(result.getString("NATIONAL_CODE"));
-                realCustomer.setCustomerNumber(customerNumber);
+                realCustomer.getId();
+                realCustomer.getName();
+                realCustomer.getFamilyName();
+                realCustomer.getFatherName();
+                realCustomer.getBirthDate();
+                realCustomer.getNationalCode();
+                realCustomer.getCustomerNumber();
             }
         }catch (HibernateException e){
             if(transaction != null){

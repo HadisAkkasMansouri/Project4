@@ -67,6 +67,7 @@
 <script>
     function validation() {
         var input = document.getElementsByName("NationalCode")[0].value;
+        alert(input);
         if (input.length!=10) {
             alert("کد ملی باید ۱۰ رقم باشد لطفا مجددا تلاش نمایید");
             return false;

@@ -4,9 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "legal_customer")
-//@AttributeOverrides({
-//        @AttributeOverride(name = "id", column = @Column(name = "id"))
-//})
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "id"))
+})
 public class LegalCustomer extends Customer {
 
     @Id

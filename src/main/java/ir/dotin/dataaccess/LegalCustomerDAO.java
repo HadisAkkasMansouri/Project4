@@ -19,7 +19,7 @@ public class LegalCustomerDAO {
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try {
-            Query query = session.createQuery("select from LegalCustomer lc where lc.economicCode= :economicCode");
+            Query query = session.createQuery("from LegalCustomer lc where lc.economicCode= :economicCode");
             System.out.println(query);
             query.setParameter("economicCode", economicCode);
             Object result = query.getSingleResult();
@@ -50,11 +50,6 @@ public class LegalCustomerDAO {
                 legalCustomer = new LegalCustomer(id, companyName, registrationDate, economicCode);
                 legalCustomer = (LegalCustomer) session.save(legalCustomer);
                 transaction.commit();
-                legalCustomer.setId(id);
-                legalCustomer.setCompanyName(companyName);
-                legalCustomer.setRegistrationDate(registrationDate);
-                legalCustomer.setEconomicCode(economicCode);
-                legalCustomer.setCustomerNumber(customerNumber);
             }
         } catch (HibernateException e) {
             if (transaction != null) {
@@ -96,18 +91,18 @@ public class LegalCustomerDAO {
         Transaction transaction = null;
         Query query = null;
         int counter = 1;
-        StringBuilder queryString = new StringBuilder("select from LegalCustomer lc ");
+        StringBuilder queryString = new StringBuilder("select from LegalCustomer lc, Customer c where lc.id = c.id and ");
         List<String> parameters = new ArrayList<String>();
         if ((customerNumber != null) && (!customerNumber.trim().equals(""))) {
-            queryString.append("c.customer.customerNumber= :customerNumber");
+            queryString.append("c.customer.customerNumber= :customerNumber and ");
             parameters.add(customerNumber);
         }
         if ((companyName != null) && (!companyName.trim().equals(""))) {
-            queryString.append("lc.companyName= :companyName");
+            queryString.append("lc.companyName= :companyName and");
             parameters.add(companyName);
         }
         if ((economicCode != null) && (!economicCode.trim().equals(""))) {
-            queryString.append("lc.economicCode= :economicCode");
+            queryString.append("lc.economicCode= :economicCode and");
             parameters.add(economicCode);
         }
         queryString.append("true");

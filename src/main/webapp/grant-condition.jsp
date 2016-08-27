@@ -39,23 +39,23 @@
     </style>
 </head>
 <body>
-<p class="capitalize">اضافه کردن کاربر حقیقی</p>
+<p class="capitalize">اضافه کردن شروط اعطا</p>
 <form class="add" action="/AddRealCustomerServlet" method="get" onsubmit="return validation()">
     <fieldset>
-        <legend>لطفا اطلاعات کاربر حقیقی را وارد نمایید</legend>
+        <legend>لطفا اطلاعات شروط اعطا را وارد نمایید</legend>
         نام <br>
         <input type="text" name="Name">
         <br>
-        نام خانوادگی <br>
+        حداقل مدت قرداد <br>
         <input type="text" name="FamilyName">
         <br>
-        نام پدر <br>
+        حداکثر مدت قرداد <br>
         <input type="text" name="FatherName">
         <br>
-        تاریخ تولد <br>
+        حداقل مبلغ قرداد <br>
         <input type="text" name="BirthDate">
         <br>
-        کد ملی <br>
+        حداکثر مبلغ قرداد <br>
         <input type="text" name="NationalCode">
         <br><br>
         <button type="submit" value="RegistrateInformation"><b>ثبت اطاعات</b></button>
@@ -65,28 +65,6 @@
     <button onclick="goBack()">صفحه قبل <<</button>
 </div>
 <script>
-    function validation() {
-        var input = document.getElementsByName("NationalCode")[0].value;
-        alert(input);
-        if (input.length!=10) {
-            alert("کد ملی باید ۱۰ رقم باشد لطفا مجددا تلاش نمایید");
-            return false;
-        }
-        var check = parseInt(input[9]);
-        var sum = 0;
-        var i;
-        for (i = 0; i < 9; ++i) {
-            sum += parseInt(input[i]) * (10 - i);
-        }
-        sum %= 11;
-        var result = (sum < 2 && check == sum) || (sum >= 2 && check + sum == 11);
-        if (result) {
-            return true;
-        } else {
-            alert("کد ملی وارد شده صحیح نمی باشد لطفا مجددا تلاش نمایید");
-            return false;
-        }
-    }
     function goBack() {
         window.history.back();
     }

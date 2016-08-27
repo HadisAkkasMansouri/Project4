@@ -8,7 +8,6 @@ import javax.persistence.*;
 public class Customer {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @ManyToOne
     @JoinColumn(name = "id")
     private int id;
 

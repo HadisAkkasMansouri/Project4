@@ -5,10 +5,8 @@ import ir.dotin.utility.SessionConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import javax.persistence.Query;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class CustomerDAO {
 

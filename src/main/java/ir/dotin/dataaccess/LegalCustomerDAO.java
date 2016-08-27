@@ -68,7 +68,7 @@ public class LegalCustomerDAO {
         Transaction transaction = null;
         try {
             if (CustomerDAO.deleteCustomer(id)) {
-                Query query = session.createQuery("delete from  LegalCustomer lc where id= :id");
+                Query query = session.createQuery("delete from  LegalCustomer lc where lc.id= :id");
                 query.setParameter("id", id);
                 query.executeUpdate();
                 transaction.commit();
@@ -94,15 +94,15 @@ public class LegalCustomerDAO {
         StringBuilder queryString = new StringBuilder("select from LegalCustomer lc, Customer c where lc.id = c.id and ");
         List<String> parameters = new ArrayList<String>();
         if ((customerNumber != null) && (!customerNumber.trim().equals(""))) {
-            queryString.append("c.customer.customerNumber= :customerNumber and ");
+            queryString.append("c.customerNumber= :customerNumber and ");
             parameters.add(customerNumber);
         }
         if ((companyName != null) && (!companyName.trim().equals(""))) {
-            queryString.append("lc.companyName= :companyName and");
+            queryString.append("lc.companyName= :companyName and ");
             parameters.add(companyName);
         }
         if ((economicCode != null) && (!economicCode.trim().equals(""))) {
-            queryString.append("lc.economicCode= :economicCode and");
+            queryString.append("lc.economicCode= :economicCode and ");
             parameters.add(economicCode);
         }
         queryString.append("true");
@@ -133,11 +133,11 @@ public class LegalCustomerDAO {
             List result = query.getResultList();
             transaction.commit();
             while (result != null) {
-//                legalCustomer.setId(results.getInt("ID"));
-//                legalCustomer.setCustomerNumber(CustomerDAO.retrieveCustomerNumberById(results.getInt("ID")));
-//                legalCustomer.setCompanyName(results.getString("COMPANY_NAME"));
-//                legalCustomer.setEconomicCode(results.getString("ECONOMIC_CODE"));
-//                legalCustomer.setRegistrationDate(results.getString("REGISTRATION_DATE"));
+                legalCustomer.getId();
+                legalCustomer.getCompanyName();
+                legalCustomer.getCustomerNumber();
+                legalCustomer.getEconomicCode();
+                legalCustomer.getRegistrationDate();
                 legalCustomers.add(legalCustomer);
             }
         } catch (HibernateException e) {
@@ -151,12 +151,12 @@ public class LegalCustomerDAO {
         return legalCustomers;
     }
 
-    public LegalCustomer updateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber){
+    public LegalCustomer updateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber) {
 
         int id = CustomerDAO.retrieveIdByCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
-        try{
+        try {
             Query query = session.createQuery("update LegalCustomer lc set lc.companyName= :companyName, lc.economicCode= :economicCode, lc.registrationDate= : registrationDate" +
                     " where lc.id= :id");
             query.setParameter("companyName", companyName);
@@ -171,12 +171,12 @@ public class LegalCustomerDAO {
             legalCustomer.setEconomicCode(economicCode);
             legalCustomer.setRegistrationDate(registrationDate);
             legalCustomer.setCustomerNumber(customerNumber);
-        }catch (HibernateException e){
-            if(transaction != null){
+        } catch (HibernateException e) {
+            if (transaction != null) {
                 transaction.rollback();
                 e.printStackTrace();
             }
-        }finally {
+        } finally {
             session.close();
         }
         return legalCustomer;
@@ -186,18 +186,21 @@ public class LegalCustomerDAO {
     public LegalCustomer getLegalCustomer(int id) {
 
         String customerNumber = CustomerDAO.retrieveCustomerNumberById(id);
+        legalCustomer.setCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try {
-            Query query = session.createQuery("select from LegalCustomer lc where id= :id");
+            Query query = session.createQuery("from LegalCustomer lc where lc.id= :id");
             query.setParameter("id", id);
             Object result = query.getFirstResult();
             transaction.commit();
-//            legalCustomer.setId(result.getInt("ID"));
-//            legalCustomer.setCompanyName(result.getString("COMPANY_NAME"));
-//            legalCustomer.setEconomicCode(result.getString("ECONOMIC_CODE"));
-//            legalCustomer.setRegistrationDate(result.getString("REGISTRATION_DATE"));
-            legalCustomer.setCustomerNumber(customerNumber);
+            while (result != null) {
+                legalCustomer.getId();
+                legalCustomer.getCompanyName();
+                legalCustomer.getEconomicCode();
+                legalCustomer.getRegistrationDate();
+                legalCustomer.getCustomerNumber();
+            }
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();

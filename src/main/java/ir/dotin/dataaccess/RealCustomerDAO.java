@@ -99,18 +99,18 @@ public class RealCustomerDAO extends Customer {
         StringBuilder queryString = new StringBuilder("from RealCustomer rc, Customer c where rc.id = c.id and ");
         List<String> parameters = new ArrayList<String>();
         if((customerNumber != null) && (!customerNumber.trim().equals(""))){
-            queryString.append("c.customer.customerNumber= :customerNumber and ");
+            queryString.append("c.customerNumber= :customerNumber and ");
             parameters.add(customerNumber);
         }
         if((name != null) && (!name.trim().equals(""))){
-            queryString.append("rc.name= :name and");
+            queryString.append("rc.name= :name and ");
             parameters.add(name);
         }
         if((familyName != null) && (!familyName.trim().equals(""))){
-            queryString.append("rc.familyName= :familyName and");
+            queryString.append("rc.familyName= :familyName and ");
             parameters.add(familyName);
         }if((nationalCode != null) && (!nationalCode.trim().equals(""))){
-            queryString.append("rc.nationalCode= :nationalCode and");
+            queryString.append("rc.nationalCode= :nationalCode and ");
             parameters.add(nationalCode);
         }
         queryString.append("true");
@@ -146,7 +146,7 @@ public class RealCustomerDAO extends Customer {
                 realCustomer.getFamilyName();
                 realCustomer.getFatherName();
                 realCustomer.getBirthDate();
-                realCustomer.getBirthDate();
+                realCustomer.getNationalCode();
                 realCustomer.getCustomerNumber();
                 realCustomers.add(realCustomer);
             }
@@ -199,6 +199,7 @@ public class RealCustomerDAO extends Customer {
     public RealCustomer getRealCustomer(int id){
 
         String customerNumber = CustomerDAO.retrieveCustomerNumberById(id);
+        realCustomer.setCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try{

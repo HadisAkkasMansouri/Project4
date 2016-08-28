@@ -4,21 +4,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Loan_Type")
+@Table(name = "LoanType")
 public class LoanType {
 
     @Id
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int loanTypeId;
 
-    @Column(name = "Loan_Type_name", unique = true, nullable = false)
+    @Column(name = "loan_type_name", unique = true, nullable = false)
     private String loanTypeName;
 
-    @Column(name = "Interest_Rate", nullable = false)
+    @Column(name = "interest_rate", nullable = false)
     private float interestRate;
 
     @OneToMany
-    @JoinColumn(name = "Loan_Type_Id")
+    @JoinColumn(name = "loan_type_id")
     private List<GrantCondition> grantConditions;
 
     public int getLoanTypeId() {

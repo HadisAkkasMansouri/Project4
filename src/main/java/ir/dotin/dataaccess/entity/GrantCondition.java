@@ -4,29 +4,29 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "Grant_Condition")
+@Table(name = "GrantCondition")
 public class GrantCondition {
 
     @Id
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int grantConditionId;
 
-    @Column(name = "Grant_Condition_Name", nullable = false)
+    @Column(name = "grant_condition_name", nullable = false)
     private String grantConditionName;
 
-    @Column(name = "Minimum_Duration", nullable = false)
+    @Column(name = "minimum_duration", nullable = false)
     private int minDuration;
 
-    @Column(name = "Maximum_Duration", nullable = false)
+    @Column(name = "maximum_duration", nullable = false)
     private int maxDuration;
 
-    @Column(name = "Minimum_Amount", nullable = false)
+    @Column(name = "minimum_amount", nullable = false)
     private BigDecimal minAmount;
 
-    @Column(name = "Maximum_Amount", nullable = false)
+    @Column(name = "maximum_amount", nullable = false)
     private BigDecimal maxAmount;
 
-    @Column(name = "Loan_Type_Id", nullable = false, unique = true)
+    @Column(name = "loan_type_id", nullable = false, unique = true)
     private int loanTypeId;
 
     public int getGrantConditionId() {

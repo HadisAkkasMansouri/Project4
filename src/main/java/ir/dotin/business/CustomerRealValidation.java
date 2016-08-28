@@ -64,10 +64,10 @@ public class CustomerRealValidation {
         }
     }
 
-    public static List<RealCustomer> searchRealCustomer(String name, String familyName, String nationalCode, String realCustomerNumber) {
+    public static List<RealCustomer> searchRealCustomer(String name, String familyName, String nationalCode, String customerNumber) {
 
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
-        List<RealCustomer> realCustomers = realCustomerDAO.searchRealCustomer(name, familyName, nationalCode, realCustomerNumber);
+        List<RealCustomer> realCustomers = realCustomerDAO.searchRealCustomer(name, familyName, nationalCode, customerNumber);
         return realCustomers;
     }
 
@@ -75,6 +75,13 @@ public class CustomerRealValidation {
 
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
         RealCustomer realCustomer = realCustomerDAO.getRealCustomer(id);
+        return realCustomer;
+    }
+
+    public static RealCustomer getRealCustomerInfo(String customerNumber){
+
+        RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
+        RealCustomer realCustomer = realCustomerDAO.retrieveRealCustomerName(customerNumber);
         return realCustomer;
     }
 }

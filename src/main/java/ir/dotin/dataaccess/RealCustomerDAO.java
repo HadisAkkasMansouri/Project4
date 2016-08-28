@@ -24,9 +24,9 @@ public class RealCustomerDAO extends Customer {
             Query query = session.createQuery("select rc.id from RealCustomer rc where rc.nationalCode= :nationalCode");
             System.out.println(query);
             query.setParameter("nationalCode", nationalCode);
-            Object result = query.getSingleResult();
+            List result = query.getResultList();
             transaction.commit();
-            if (result != null) {
+            if (!result.isEmpty()) {
                 throw new DuplicateEntranceException("کد ملی وارد شده یکتا نیست٬ لطفا مجددا تلاش نمایید");
             }
         } catch (HibernateException e) {

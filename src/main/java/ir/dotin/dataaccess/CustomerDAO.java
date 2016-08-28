@@ -6,7 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import javax.persistence.Query;
-import java.security.interfaces.RSAKey;
 import java.sql.Connection;
 
 public class CustomerDAO {

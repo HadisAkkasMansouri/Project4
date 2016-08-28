@@ -49,7 +49,7 @@
                 <br>
                 <br>
                 <%
-                    ArrayList<RealCustomer> realCustomers = (ArrayList<RealCustomer>) request.getAttribute("realCustomers");
+                    ArrayList<RealCustomer> realCustomers = (ArrayList<RealCustomer>) request.getAttribute("realCustomer");
 //                    if (realCustomers.size() > 0) {
                 %>
                 <p class="capitalize">مشتری حقیقی به شرح زیر با موفقیت٬ ذخیره شد</p>

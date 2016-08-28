@@ -29,7 +29,7 @@ public class AddRealCustomerServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("show-added-real-customer.jsp");
         try {
             RealCustomer realCustomer = CustomerRealValidation.validateAddRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
-            request.setAttribute("realCustomers" , realCustomer);
+            request.setAttribute("realCustomer" , realCustomer);
             rd.forward(request, response);
         } catch (InvalidEntranceException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));

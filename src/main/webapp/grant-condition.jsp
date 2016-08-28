@@ -15,10 +15,10 @@
         }
 
         .capitalize {
-            font-size: 3.8em;
+            font-size: 2.8em;
             color: cornsilk;
             text-align: right;
-            line-height: 2.8;
+            line-height: 1.8;
             margin-right: 3cm;
         }
 
@@ -28,46 +28,60 @@
             background-color: darkgoldenrod;
         }
 
-        .style {
+        .form {
             font-weight: bold;
             position: absolute;
             left: 5%;
             bottom: 15%;
             z-index: -1;
+            color: cornsilk;
         }
 
     </style>
 </head>
 <body>
 <p class="capitalize">اضافه کردن شروط اعطا</p>
-<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit="return validation()">
+<form class="add" action="/AddGrantConditionServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات شروط اعطا را وارد نمایید</legend>
-        نام <br>
-        <input type="text" name="Name">
-        <br>
-        حداقل مدت قرداد <br>
-        <input type="text" name="FamilyName">
-        <br>
-        حداکثر مدت قرداد <br>
-        <input type="text" name="FatherName">
-        <br>
-        حداقل مبلغ قرداد <br>
-        <input type="text" name="BirthDate">
-        <br>
-        حداکثر مبلغ قرداد <br>
-        <input type="text" name="NationalCode">
-        <br><br>
-        <button type="submit" value="RegistrateInformation"><b>ثبت اطاعات</b></button>
+        <table>
+            <tr>
+                <td>نام</td>
+                <td><input type="text" id="grantConditionName"></td>
+            </tr>
+            <tr>
+                <td>حداقل مدت قرداد</td>
+                <td><input type="text" id="minDuration"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td>حداکثر مدت قرداد</td>
+                <td><input type="text" id="maxDuration"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td>حداقل مبلغ قرداد</td>
+                <td><input type="text" id="minAmount"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td>حداکثر مبلغ قرداد</td>
+                <td><input type="text" id="maxAmount"></td>
+            </tr>
+            <tr>
+
+                <button type="submit" value="RegistrateInformation"><b>ثبت اطاعات</b></button>
+        </table>
     </fieldset>
 </form>
-<div class="style">
-    <button onclick="goBack()">صفحه قبل <<</button>
+<div>
+    <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
-    function goBack() {
-        window.history.back();
-    }
+
 </script>
 </body>
 </html>

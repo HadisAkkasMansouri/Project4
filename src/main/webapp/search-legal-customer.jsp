@@ -29,12 +29,13 @@
             background-color: darkgoldenrod;
         }
 
-        .style {
+        .form {
             font-weight: bold;
             position: absolute;
             left: 5%;
             bottom: 15%;
             z-index: -1;
+            color: cornsilk;
         }
 
     </style>
@@ -56,13 +57,11 @@
         <button type="submit" value="search"><b>جست و جو</b></button>
     </fieldset>
 </form>
-<div class="style">
-    <button onclick="goBack()">صفحه قبل <<</button>
+<div>
+    <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
-    function goBack() {
-        window.history.back();
-    }
+
 </script>
 </body>
 </html>

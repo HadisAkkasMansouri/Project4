@@ -1,3 +1,4 @@
+<%@ page import="ir.dotin.business.CustomerRealValidation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -29,38 +30,37 @@
             background-color: darkgoldenrod;
         }
 
-        .style {
+        .form {
             font-weight: bold;
             position: absolute;
             left: 5%;
             bottom: 15%;
             z-index: -1;
+            color: cornsilk;
         }
 
     </style>
 </head>
 <body>
 <p class="capitalize">تشکیل پرونده تسهیلاتی</p>
-<form class="add" action="/AddLegalCustomerServlet" method="get">
+<form class="add" action="/" method="get">
     <fieldset>
         <legend>لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</legend>
         <br>
-        <button onclick="retrieveRealCustomerName()"><b>بازیابی</b>
-        </button><input type="text" name="CompanyName">
+        <button onclick="retrieveRealCustomerName()", type="submit"><b>بازیابی</b>
+        </button><input type="text" name="customerNumber" value="<%=request.getAttribute("customerNumber")%>">
         <br>
         <br>
     </fieldset>
 </form>
-<div class="style">
-    <button onclick="goBack()">صفحه قبل <<</button>
+<div>
+        <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
-    function goBack() {
-        window.history.back();
-    }
-
     function retrieveRealCustomerName() {
-
+        <%
+//        CustomerRealValidation.getRealCustomerInfo(customerNumber);
+        %>
     }
 </script>
 </body>

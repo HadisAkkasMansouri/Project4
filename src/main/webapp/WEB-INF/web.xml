@@ -44,6 +44,14 @@
         <servlet-name>SaveChangesLegalCustomerServlet</servlet-name>
         <servlet-class>ir.dotin.presentation.SaveChangesLegalCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddLoanTypeServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.AddLoanTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddGrantConditionServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.AddGrantDonditionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddLegalCustomerServlet</servlet-name>
         <url-pattern>/AddLegalCustomerServlet</url-pattern>
@@ -83,5 +91,13 @@
     <servlet-mapping>
         <servlet-name>SaveChangesRealCustomerServlet</servlet-name>
         <url-pattern>/SaveChangesRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddLoanTypeServlet</servlet-name>
+        <url-pattern>/AddLoanTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGrantConditionServlet</servlet-name>
+        <url-pattern>/AddGrantConditionServlet</url-pattern>
     </servlet-mapping>
 </web-app>

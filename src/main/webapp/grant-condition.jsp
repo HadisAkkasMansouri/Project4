@@ -40,7 +40,7 @@
 </head>
 <body>
 <p class="capitalize">اضافه کردن شروط اعطا</p>
-<form class="add" action="/AddRealCustomerServlet" method="get" onsubmit="return validation()">
+<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit="return validation()">
     <fieldset>
         <legend>لطفا اطلاعات شروط اعطا را وارد نمایید</legend>
         نام <br>

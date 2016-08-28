@@ -17,14 +17,12 @@ public class LoanType {
     @Column(name = "interest_rate", nullable = false)
     private float interestRate;
 
-    @OneToMany
-    @JoinColumn(name = "loan_type_id")
+    @ManyToOne
     private List<GrantCondition> grantConditions;
 
     public LoanType(){}
 
     public LoanType(String loanTypeName, float interestRate){
-
         this.loanTypeName = loanTypeName;
         this.interestRate = interestRate;
     }

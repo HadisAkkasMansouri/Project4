@@ -7,7 +7,7 @@ import java.util.List;
 @Table(name = "LoanType")
 public class LoanType {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int loanTypeId;
 
@@ -20,6 +20,14 @@ public class LoanType {
     @OneToMany
     @JoinColumn(name = "loan_type_id")
     private List<GrantCondition> grantConditions;
+
+    public LoanType(){}
+
+    public LoanType(String loanTypeName, float interestRate){
+
+        this.loanTypeName = loanTypeName;
+        this.interestRate = interestRate;
+    }
 
     public int getLoanTypeId() {
         return loanTypeId;

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class LoanFile {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int loanFileId;
 

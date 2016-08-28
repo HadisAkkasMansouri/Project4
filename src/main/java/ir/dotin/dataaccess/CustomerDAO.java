@@ -6,11 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import javax.persistence.Query;
-import java.sql.Connection;
 
 public class CustomerDAO {
-
-    static Connection connection = null;
 
     public static int addCustomer(String customerNumber){
 

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @Table(name = "GrantCondition")
 public class GrantCondition {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int grantConditionId;
 
@@ -29,6 +29,16 @@ public class GrantCondition {
     @Column(name = "loan_type_id", nullable = false, unique = true)
     private int loanTypeId;
 
+    public GrantCondition(){}
+
+    public GrantCondition(String grantConditionName, int minDuration, int maxDuration, BigDecimal minAmount, BigDecimal maxAmount){
+
+        this.grantConditionName = grantConditionName;
+        this.minDuration = minDuration;
+        this.maxDuration = maxDuration;
+        this.minAmount = minAmount;
+        this.maxAmount = maxAmount;
+    }
     public int getGrantConditionId() {
         return grantConditionId;
     }

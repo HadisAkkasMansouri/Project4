@@ -3,7 +3,7 @@ package ir.dotin.dataaccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "real_customer")
+@Table(name = "RealCustomer")
 @AttributeOverrides({
         @AttributeOverride(name = "id", column = @Column(name = "id"))
 })

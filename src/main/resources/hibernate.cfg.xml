@@ -18,7 +18,13 @@
         <property name="hibernate.connection.password">
             root
         </property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="show_sql">true</property>
+        <mapping class="ir.dotin.dataaccess.entity.Customer"/>
+        <mapping class="ir.dotin.dataaccess.entity.GrantCondition"/>
+        <mapping class="ir.dotin.dataaccess.entity.LegalCustomer"/>
+        <mapping class="ir.dotin.dataaccess.entity.RealCustomer"/>
+        <mapping class="ir.dotin.dataaccess.entity.LoanType"/>
+        <mapping class="ir.dotin.dataaccess.entity.LoanFile"/>
     </session-factory>
 </hibernate-configuration>

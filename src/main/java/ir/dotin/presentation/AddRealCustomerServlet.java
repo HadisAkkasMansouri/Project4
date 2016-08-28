@@ -7,6 +7,7 @@ import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
 //import ir.dotin.utility.PageGenerator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,18 +26,22 @@ public class AddRealCustomerServlet extends HttpServlet {
         String fatherName = request.getParameter("FatherName");
         String birthDate = request.getParameter("BirthDate");
         String nationalCode = request.getParameter("NationalCode");
-//        try {
-//            RealCustomer realCustomer = CustomerRealValidation.validateAddRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
-//            response.getWriter().println(PageGenerator.generateAddRealCustomerPage(realCustomer));
-//        } catch (InvalidEntranceException e) {
+        RequestDispatcher rd = request.getRequestDispatcher("show-added-real-customer.jsp");
+        try {
+            RealCustomer realCustomer = CustomerRealValidation.validateAddRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
+            request.setAttribute("realCustomers" , realCustomer);
+            rd.forward(request, response);
+        } catch (InvalidEntranceException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));
-//            e.printStackTrace();
-//        } catch (NullRequiredFieldException e) {
+            e.printStackTrace();
+        } catch (NullRequiredFieldException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));
-//            e.printStackTrace();
-//        } catch (DuplicateEntranceException e) {
+            e.printStackTrace();
+        } catch (DuplicateEntranceException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));
-//            e.printStackTrace();
-//        }
+            e.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

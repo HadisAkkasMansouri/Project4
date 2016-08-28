@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 public class GrantCondition {
 
     @Id
-    @ManyToOne
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int grantConditionId;
 

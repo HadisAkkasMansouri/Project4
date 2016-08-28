@@ -9,14 +9,13 @@ import java.math.BigDecimal;
 public class LoanFile {
 
     @Id
-    @ManyToOne
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int loanFileId;
 
-
+    @ManyToOne
     private RealCustomer realCustomer;
 
-
+    @ManyToOne
     private LoanType loanType;
 
     @Column(name = "duration", nullable = false)

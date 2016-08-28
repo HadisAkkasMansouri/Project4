@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import javax.persistence.Query;
+import java.security.interfaces.RSAKey;
 import java.sql.Connection;
 
 public class CustomerDAO {
@@ -42,10 +43,10 @@ public class CustomerDAO {
             transaction = session.beginTransaction();
             Query query = session.createQuery("select max(c.customerNumber) from Customer c");
             System.out.println(query);
-            Object result = query.getSingleResult();
+            String result = (String) query.getSingleResult();
             transaction.commit();
-            if ((Integer) result != 0) {
-                customerNumber++;
+            if (result !=  null && !result.equals("")) {
+                customerNumber = Integer.parseInt(result) + 1;
             } else {
                 customerNumber = 10000;
             }
@@ -90,7 +91,7 @@ public class CustomerDAO {
             transaction = session.beginTransaction();
             Query query = session.createQuery("select max(c.id) from Customer c");
             System.out.println(query);
-            Object result = query.getSingleResult();
+            Object result = query.getFirstResult();
             if ((Integer) result != 0) {
                 id++;
             } else {

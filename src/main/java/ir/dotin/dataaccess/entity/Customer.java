@@ -3,7 +3,7 @@ package ir.dotin.dataaccess.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "Customer")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Customer {
 

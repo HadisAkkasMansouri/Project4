@@ -8,7 +8,6 @@ import java.util.List;
 public class LoanType {
 
     @Id
-    @OneToMany
     @JoinColumn(name = "id", unique = true, nullable = false)
     private int loanTypeId;
 
@@ -18,8 +17,9 @@ public class LoanType {
     @Column(name = "Interest_Rate", nullable = false)
     private float interestRate;
 
-    @Column(name = "Grant_Conditions", nullable = false)
-    private List<GrantCondition> grantConditionList;
+    @OneToMany
+    @JoinColumn(name = "Loan_Type_Id")
+    private List<GrantCondition> grantConditions;
 
     public int getLoanTypeId() {
         return loanTypeId;
@@ -33,8 +33,8 @@ public class LoanType {
         return interestRate;
     }
 
-    public List<GrantCondition> getGrantConditionList() {
-        return grantConditionList;
+    public List<GrantCondition> getGrantConditions() {
+        return grantConditions;
     }
 
     public void setLoanTypeId(int loanTypeId) {
@@ -49,7 +49,7 @@ public class LoanType {
         this.interestRate = interestRate;
     }
 
-    public void setGrantConditionList(List<GrantCondition> grantConditionList) {
-        this.grantConditionList = grantConditionList;
+    public void setGrantConditions(List<GrantCondition> grantConditions) {
+        this.grantConditions = grantConditions;
     }
 }

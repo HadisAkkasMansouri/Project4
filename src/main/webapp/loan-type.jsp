@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <title>addRealCustomer</title>
@@ -36,28 +36,35 @@
             z-index: -1;
             color: cornsilk;
         }
+        .textError{
+            font-weight: bold;
+            color: crimson;
+            text-align: right;
+            font-size: 1.8em;
+        }
 
     </style>
 </head>
 <body>
 <p class="capitalize">اضافه کردن نوع تسهیلات</p>
+<div class=title>
+    <h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+    </h1>
+</div>
 <form class="add" action="/AddLoanTypeServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات نوع تسهیلات کاربر حقیقی را وارد نمایید</legend>
         نام نوع تسهیلات <br>
-        <input type="text" name="Name">
+        <input type="text" name="loanTypeName">
         <br>
         نرخ سود <br>
-        <input type="text" name="FamilyName">
+        <input type="text" name="interestRate">
         <br><br>
-        <button type="submit" value="RegistrateInformation"><b>اضافه کردن شرایط اعطا</b></button>
+        <button type="submit" value="registrationInformation"><b>اضافه کردن شرایط اعطا</b></button>
     </fieldset>
 </form>
 <div>
     <td><a href="/loan.jsp" class="form">صفحه قبل <<</a></td>
 </div>
-<script>
-
-</script>
 </body>
 </html>

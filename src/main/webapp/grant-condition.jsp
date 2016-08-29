@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ir.dotin.dataaccess.entity.LoanType" %>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="/table-script.js"></script>
@@ -65,7 +65,7 @@
                         </td>
                     </tr>
                 </table>
-                <fieldset>
+                <fieldset class="add">
                     <legend>لطفا اطلاعات شروط اعطا را وارد نمایید</legend>
                     <table>
                         <tr>
@@ -77,30 +77,24 @@
                             <td><input type="text" id="minDuration"></td>
                         </tr>
                         <tr>
-                        </tr>
-                        <tr>
                             <td>حداکثر مدت قرداد</td>
                             <td><input type="text" id="maxDuration"></td>
-                        </tr>
-                        <tr>
                         </tr>
                         <tr>
                             <td>حداقل مبلغ قرداد</td>
                             <td><input type="text" id="minAmount"></td>
                         </tr>
                         <tr>
-                        </tr>
-                        <tr>
                             <td>حداکثر مبلغ قرداد</td>
                             <td><input type="text" id="maxAmount"></td>
                         </tr>
                     </table>
+                    <button type="submit" value="registrationInformation" onclick="addRowTable()"><b>ثبت اطاعات</b>
+                    </button>
                 </fieldset>
-                <input type="submit" value="ثبت اطاعات" onclick="addRowTable()"><b></b>
                 <br>
-                <hr>
                 <br>
-                <form class="add" action="/AddGrantConditionServlet" method="get">
+                <form action="/AddGrantConditionServlet" method="get">
                     <input type="hidden" name="loanType" value="<%=request.getParameter("loanType")%>">
                     <input type="hidden" name="interestRate" value="<%=request.getParameter("interestRate")%>">
                     <table class="grantConditionTable" id="grantConditionTable"></table>

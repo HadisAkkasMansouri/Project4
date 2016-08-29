@@ -1,6 +1,6 @@
 <%@ page import="ir.dotin.business.CustomerRealValidation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <title>addLegalCustomer</title>

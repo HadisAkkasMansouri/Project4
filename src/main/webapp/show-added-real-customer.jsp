@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ir.dotin.dataaccess.entity.RealCustomer" %>
 <%@ page import="java.util.ArrayList" %>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <title>showAddedRealCustomer</title>

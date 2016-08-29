@@ -1,8 +1,5 @@
 package ir.dotin.utility;
 
-import ir.dotin.dataaccess.CustomerDAO;
-import ir.dotin.dataaccess.entity.Customer;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -17,11 +14,5 @@ public class SessionConnection {
             throw new ExceptionInInitializerError(e);
         }
         return factory;
-    }
-
-    public static void main(String[] args) {
-        SessionFactory sessionConnection = getSessionConnection();
-
-        CustomerDAO.addCustomer("1223");
     }
 }

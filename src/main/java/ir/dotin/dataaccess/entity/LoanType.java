@@ -17,7 +17,7 @@ public class LoanType {
     @Column(name = "interest_rate", nullable = false)
     private float interestRate;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "loanTypeId")
     private List<GrantCondition> grantConditions;
 
     public LoanType(){}

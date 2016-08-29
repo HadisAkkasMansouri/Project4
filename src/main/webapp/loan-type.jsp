@@ -41,7 +41,7 @@
 </head>
 <body>
 <p class="capitalize">اضافه کردن نوع تسهیلات</p>
-<form class="add" action="grant-condition.jsp" method="get">
+<form class="add" action="/AddLoanTypeServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات نوع تسهیلات کاربر حقیقی را وارد نمایید</legend>
         نام نوع تسهیلات <br>
@@ -50,11 +50,11 @@
         نرخ سود <br>
         <input type="text" name="FamilyName">
         <br><br>
-        <button type="submit" value="RegistrateInformation"><b>ثبت اطاعات</b></button>
+        <button type="submit" value="RegistrateInformation"><b>اضافه کردن شرایط اعطا</b></button>
     </fieldset>
 </form>
 <div>
-    <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
+    <td><a href="/loan.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
 

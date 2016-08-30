@@ -5,8 +5,6 @@ import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
-//import ir.dotin.utility.PageGenerator;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,21 +23,19 @@ public class AddRealCustomerServlet extends HttpServlet {
         String fatherName = request.getParameter("FatherName");
         String birthDate = request.getParameter("BirthDate");
         String nationalCode = request.getParameter("NationalCode");
-        RequestDispatcher rd = request.getRequestDispatcher("show-added-real-customer.jsp");
         try {
             RealCustomer realCustomer = CustomerRealValidation.validateAddRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
             request.setAttribute("realCustomer" , realCustomer);
-            rd.forward(request, response);
-        } catch (InvalidEntranceException e) {
-//            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));
-            e.printStackTrace();
-        } catch (NullRequiredFieldException e) {
-//            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));
-            e.printStackTrace();
-        } catch (DuplicateEntranceException e) {
-//            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));
+            getServletConfig().getServletContext().getRequestDispatcher("show-added-real-customer.jsp").forward(request, response);
+        } catch (InvalidEntranceException | NullRequiredFieldException | DuplicateEntranceException e) {
+            request.setAttribute("text", "\n" + e.getMessage());
+            request.setAttribute("url", "/add-real-customer.jsp");
+            getServletConfig().getServletContext().getRequestDispatcher("/add-real-customer.jsp").forward(request, response);
             e.printStackTrace();
         }catch (Exception e){
+            request.setAttribute("text", "\n" + e.getMessage());
+            request.setAttribute("url", "/add-real-customer.jsp");
+            getServletConfig().getServletContext().getRequestDispatcher("/add-real-customer.jsp").forward(request, response);
             e.printStackTrace();
         }
     }

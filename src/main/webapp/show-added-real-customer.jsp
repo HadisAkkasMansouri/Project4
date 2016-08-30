@@ -44,11 +44,10 @@
                 <br>
                 <br>
                 <%
-                    ArrayList<RealCustomer> realCustomers = (ArrayList<RealCustomer>) request.getAttribute("realCustomer");
-//                    if (realCustomers.size() > 0) {
+                    RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");
                 %>
                 <p class="capitalize">مشتری حقیقی به شرح زیر با موفقیت٬ ذخیره شد</p>
-                <table>
+                <table table style="color: darkgoldenrod">
                     <thead>
                     <tr>
                         <th>
@@ -71,11 +70,8 @@
                         </th>
                     </tr>
                     </thead>
-                    <body>
-                    <%
-                        for (RealCustomer realCustomer : realCustomers) {
-//                        RealCustomer realCustomer = new RealCustomer();
-                    %>
+                    <tbody>
+
                     <tr>
                         <td>
                             <%=realCustomer.getCustomerNumber()%>
@@ -96,16 +92,11 @@
                             <%=realCustomer.getNationalCode()%>
                         </td>
                     </tr>
-                    <%}%>
-                    </body>
+                    </tbody>
                 </table>
-                <%--<%}%>--%>
                 <div>
                     <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
                 </div>
-                <script>
-
-                </script>
             </div>
         </div>
     </div>

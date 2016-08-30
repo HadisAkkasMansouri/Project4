@@ -41,15 +41,28 @@
             color: cornsilk;
         }
 
+        .textError{
+            font-weight: bold;
+            color: crimson;
+            text-align: right;
+            font-size: 1.0em;
+            margin-right: 3cm;
+            line-height: 1.8;
+        }
+
     </style>
 </head>
 <body>
 <h1 class="capitalize">تشکیل پرونده تسهیلاتی</h1>
-<form class="add" action="/" method="get">
+<div class=title>
+    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+    </p>
+</div>
+<form class="add" action="/AddLoanFileServlet" method="get">
     <fieldset>
         <legend>لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</legend>
         <br>
-        <button onclick="retrieveRealCustomerName()", type="submit"><b>بازیابی</b>
+        <button type="submit"><b>بازیابی</b>
         </button><input type="text" name="customerNumber" value="<%=request.getAttribute("customerNumber")%>">
         <br>
         <br>
@@ -59,11 +72,7 @@
         <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
-    function retrieveRealCustomerName() {
-        <%
-//        CustomerRealValidation.getRealCustomerInfo(customerNumber);
-        %>
-    }
+
 </script>
 </body>
 </html>

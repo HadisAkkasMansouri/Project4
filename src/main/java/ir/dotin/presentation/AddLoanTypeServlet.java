@@ -29,7 +29,6 @@ public class AddLoanTypeServlet extends HttpServlet{
         } catch (NullRequiredFieldException | InvalidEntranceException e) {
             request.setAttribute("header", "لطفا مجددا تلاش نمایید");
             request.setAttribute("text", "\n" + e.getMessage());
-            request.setAttribute("url", "/loan-type.jsp");
             getServletConfig().getServletContext().getRequestDispatcher("/loan-type.jsp").forward(request, response);
         }
     }

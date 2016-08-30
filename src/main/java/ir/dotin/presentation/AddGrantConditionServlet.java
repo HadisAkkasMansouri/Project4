@@ -46,7 +46,6 @@ public class AddGrantConditionServlet extends HttpServlet{
             }
         } catch (NullRequiredFieldException | NotInRangeException e) {
             request.setAttribute("text", "\n" + e.getMessage());
-            request.setAttribute("url", "/add-grant-condition.jsp");
             getServletConfig().getServletContext().getRequestDispatcher("/add-grant-condition.jsp").forward(request, response);
         }
     }

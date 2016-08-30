@@ -29,12 +29,10 @@ public class AddRealCustomerServlet extends HttpServlet {
             getServletConfig().getServletContext().getRequestDispatcher("show-added-real-customer.jsp").forward(request, response);
         } catch (InvalidEntranceException | NullRequiredFieldException | DuplicateEntranceException e) {
             request.setAttribute("text", "\n" + e.getMessage());
-            request.setAttribute("url", "/add-real-customer.jsp");
             getServletConfig().getServletContext().getRequestDispatcher("/add-real-customer.jsp").forward(request, response);
             e.printStackTrace();
         }catch (Exception e){
             request.setAttribute("text", "\n" + e.getMessage());
-            request.setAttribute("url", "/add-real-customer.jsp");
             getServletConfig().getServletContext().getRequestDispatcher("/add-real-customer.jsp").forward(request, response);
             e.printStackTrace();
         }

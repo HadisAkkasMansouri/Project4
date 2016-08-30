@@ -52,6 +52,10 @@
         <servlet-name>AddGrantConditionServlet</servlet-name>
         <servlet-class>ir.dotin.presentation.AddGrantDonditionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddLoanFileServlet</servlet-name>
+        <servlet-class>ir.dotin.presentation.AddLoanFileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddLegalCustomerServlet</servlet-name>
         <url-pattern>/AddLegalCustomerServlet</url-pattern>
@@ -99,5 +103,9 @@
     <servlet-mapping>
         <servlet-name>AddGrantConditionServlet</servlet-name>
         <url-pattern>/AddGrantConditionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddLoanFileServlet</servlet-name>
+        <url-pattern>/AddLoanFileServlet</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -4,16 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "LegalCustomer")
-//@AttributeOverrides({
-//        @AttributeOverride(name = "id", column = @Column(name = "id"))
-//})
 public class LegalCustomer extends Customer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id")
-    @PrimaryKeyJoinColumn(name="id")
-    private int id;
 
     @Column(name = "company_name", nullable = false)
     private String companyName;
@@ -26,8 +17,8 @@ public class LegalCustomer extends Customer {
 
     public LegalCustomer(){}
 
-    public LegalCustomer(int id, String companyName, String registrationDate, String economicCode){
-        this.id = id;
+    public LegalCustomer(String  customerNumber, String companyName, String registrationDate, String economicCode){
+        super(customerNumber);
         this.companyName = companyName;
         this.registrationDate = registrationDate;
         this.economicCode = economicCode;
@@ -45,11 +36,6 @@ public class LegalCustomer extends Customer {
         return economicCode;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
@@ -63,18 +49,12 @@ public class LegalCustomer extends Customer {
     }
 
     @Override
-    public void setId(int id) {
-        super.setId(id);
-        this.id = id;
-    }
-
-    @Override
     public String toString() {
         return "RealCustomer{" +
                 "name ='" + companyName + '\'' +
                 ", registrationDate ='" + registrationDate + '\'' +
                 ", economicId ='" + economicCode + '\'' +
-                ", id ='" + id + '\'' +
+                ", id ='" + getId() + '\'' +
                 '}';
     }
 }

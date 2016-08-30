@@ -4,15 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "RealCustomer")
-//@AttributeOverrides({
-//        @AttributeOverride(name = "id", column = @Column(name = "id"))
-//})
 public class RealCustomer extends Customer {
-
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id")
-    @PrimaryKeyJoinColumn(name="id")
-    private int id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -31,8 +23,8 @@ public class RealCustomer extends Customer {
 
     public RealCustomer(){}
 
-    public RealCustomer(int id, String name, String familyName, String fatherName, String birthDate, String nationalCode){
-        this.id = id;
+    public RealCustomer(String customerNumber ,  String name, String familyName, String fatherName, String birthDate, String nationalCode){
+        super( customerNumber);
         this.name = name;
         this.familyName = familyName;
         this.fatherName = fatherName;
@@ -60,10 +52,6 @@ public class RealCustomer extends Customer {
         return nationalCode;
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -85,22 +73,16 @@ public class RealCustomer extends Customer {
         this.nationalCode = nationalCode;
     }
 
-
-    @Override
-    public void setId(int id) {
-        super.setId(id);
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "RealCustomer{" +
                 "name ='" + name + '\'' +
                 ", family ='" + familyName + '\'' +
+                ", customerNumber ='" + getCustomerNumber() + '\'' +
                 ", fatherName ='" + fatherName + '\'' +
                 ", birthDate ='" + birthDate + '\'' +
                 ", nationalCode ='" + nationalCode + '\'' +
-                ", id ='" + id + '\'' +
+                ", id ='" + getId() + '\'' +
                 '}';
     }
 }

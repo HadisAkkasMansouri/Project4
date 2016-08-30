@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Customer")
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Customer {
 
@@ -16,8 +15,7 @@ public class Customer {
     private String customerNumber;
 
     public Customer(){}
-    public Customer(int id, String customerNumber){
-        this.id = id;
+    public Customer(String customerNumber){
         this.customerNumber = customerNumber;
     }
     public int getId() {

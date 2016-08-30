@@ -2,7 +2,7 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <title>serachRealCustom</title>
+    <title>SearchRealCustom</title>
 
     <style>
 
@@ -20,8 +20,10 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
+
 
         .search {
             color: white;
@@ -41,7 +43,7 @@
     </style>
 </head>
 <body>
-<p class="capitalize">جست و جوی کاربر حقیقی</p>
+<h1 class="capitalize">جست و جوی کاربر حقیقی</h1>
 <form class="search" action="/SearchRealCustomerServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات کاربر حقیقی را وارد نمایید</legend>

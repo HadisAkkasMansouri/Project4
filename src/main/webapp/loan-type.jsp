@@ -19,6 +19,7 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
 
@@ -48,10 +49,10 @@
     </style>
 </head>
 <body>
-<p class="capitalize">اضافه کردن نوع تسهیلات</p>
+<h1 class="capitalize">اضافه کردن نوع تسهیلات</h1>
 <div class=title>
-    <h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
-    </h1>
+    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+    </p>
 </div>
 <form class="add" action="/AddLoanTypeServlet" method="get">
     <fieldset>

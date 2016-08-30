@@ -19,8 +19,10 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
+
 
         .add {
             color: white;
@@ -49,7 +51,7 @@
     </style>
 </head>
 <body>
-<p class="capitalize">اضافه کردن کاربر حقیقی</p>
+<h1 class="capitalize">اضافه کردن کاربر حقیقی</h1>
 <h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
 </h1>
 <form class="add" action="/AddRealCustomerServlet" method="get" onsubmit="return validation()">

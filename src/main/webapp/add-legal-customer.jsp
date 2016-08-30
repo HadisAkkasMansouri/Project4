@@ -20,8 +20,10 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
+
 
         .add{
             color: white;
@@ -41,7 +43,7 @@
     </style>
 </head>
 <body>
-<p class="capitalize">اضافه کردن کاربر حقوقی</p>
+<h1 class="capitalize">اضافه کردن کاربر حقوقی</h1>
 <form class="add" action="/AddLegalCustomerServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات کاربر حقوقی را وارد نمایید </legend>

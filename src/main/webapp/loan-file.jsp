@@ -21,8 +21,10 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
+
 
         .add{
             color: white;
@@ -42,7 +44,7 @@
     </style>
 </head>
 <body>
-<p class="capitalize">تشکیل پرونده تسهیلاتی</p>
+<h1 class="capitalize">تشکیل پرونده تسهیلاتی</h1>
 <form class="add" action="/" method="get">
     <fieldset>
         <legend>لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</legend>

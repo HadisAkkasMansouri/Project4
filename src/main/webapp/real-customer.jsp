@@ -15,13 +15,14 @@
         }
 
         .capitalize {
-            position: absolute;
-            right: 5%;
-            top: 0%;
             font-size: 3.8em;
             color: cornsilk;
-            line-height: 1.2;
+            text-align: right;
+            line-height: 2.8;
+            top: 7%;
+            margin-right: 3cm;
         }
+
 
         a:link, a:visited {
             font-weight: bold;
@@ -61,13 +62,11 @@
     </style>
 </head>
 <body>
-<p class="capitalize">سامانه کاربران حقیقی</p>
-<br><br><br><br><br><br><br>
+<h1 class="capitalize">سامانه کاربران حقیقی</h1>
 <div style="width: 100%;">
     <form class="add">
         <fieldset>
             <legend class="font">لطفا گزینه مورد نظر خود را انتخاب نمایید </legend>
-            <br>
             <br>
             <a href="search-real-customer.jsp">جست و جوی کاربر</a>
             <br>
@@ -76,7 +75,6 @@
             <br>
             <br>
             <a href="loan.jsp">تسهیلات</a>
-            <br>
             <br>
             <br>
         </fieldset>

@@ -20,15 +20,9 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
-
-        .add {
-            color: white;
-            text-align: center;
-            background-color: darkgoldenrod;
-        }
-
         .form {
             font-weight: bold;
             position: absolute;
@@ -41,7 +35,7 @@
 </head>
 <body>
 <div class=title>
-    <h1>نمایش مشتری</h1>
+    <h>نمایش مشتری</h>
 </div>
 <div id=wrapper>
     <div class=content>

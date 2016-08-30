@@ -17,12 +17,14 @@
         }
 
         .capitalize {
-            font-size: 2.8em;
+            font-size: 3.8em;
             color: cornsilk;
             text-align: right;
-            line-height: 1.8;
+            line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
+
 
         .add {
             color: white;
@@ -52,9 +54,9 @@
 </head>
 <body>
 <div>
-    <p class="capitalize">اضافه کردن شروط اعطا</p>
-    <h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
-    </h1>
+    <h1 class="capitalize">اضافه کردن شروط اعطا</h1>
+    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+    </p>
 </div>
 <div id="wrapper">
     <div class="content">

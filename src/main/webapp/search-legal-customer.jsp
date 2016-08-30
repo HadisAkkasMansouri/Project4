@@ -20,8 +20,10 @@
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
+            top: 7%;
             margin-right: 3cm;
         }
+
 
         .search {
             color: white;
@@ -41,7 +43,7 @@
     </style>
 </head>
 <body>
-<p class="capitalize">جست و جوی کاربر حقوقی</p>
+<h1 class="capitalize">جست و جوی کاربر حقوقی</h1>
 <form class="search" action="/SearchLegalCustomerServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات کاربر حقوقی را وارد نمایید</legend>

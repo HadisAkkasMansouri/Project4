@@ -16,13 +16,15 @@
             }
 
             .capitalize {
-                position: absolute;
-                right: 5%;
-                top: 0%;
                 font-size: 3.8em;
                 color: cornsilk;
-                line-height: 4.2;
+                text-align: right;
+                line-height: 2.8;
+                top: 7%;
+                margin-right: 3cm;
             }
+
+
 
             a:link, a:visited {
                 font-weight: bold;
@@ -63,8 +65,7 @@
     </head>
 </head>
 <body>
-<h class="capitalize">سامانه تسهیلات کاربران حقیقی</h>
-<br><br><br><br><br><br><br><br><br><br>
+<h1 class="capitalize">سامانه تسهیلات کاربران حقیقی</h1>
 <div style="width: 100%;">
     <form class="add">
         <fieldset>

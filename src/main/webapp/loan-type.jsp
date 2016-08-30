@@ -40,7 +40,9 @@
             font-weight: bold;
             color: crimson;
             text-align: right;
-            font-size: 1.8em;
+            font-size: 1.0em;
+            margin-right: 3cm;
+            line-height: 1.8;
         }
 
     </style>

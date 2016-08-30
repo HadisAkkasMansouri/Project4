@@ -39,11 +39,22 @@
             color: cornsilk;
         }
 
+        .textError{
+            font-weight: bold;
+            color: crimson;
+            text-align: right;
+            font-size: 1.0em;
+            margin-right: 3cm;
+            line-height: 1.8;
+        }
+
     </style>
 </head>
 <body>
 <div>
     <p class="capitalize">اضافه کردن شروط اعطا</p>
+    <h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+    </h1>
 </div>
 <div id="wrapper">
     <div class="content">

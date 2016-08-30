@@ -37,10 +37,21 @@
             color: cornsilk;
         }
 
+        .textError{
+            font-weight: bold;
+            color: crimson;
+            text-align: right;
+            font-size: 1.0em;
+            margin-right: 3cm;
+            line-height: 1.8;
+        }
+
     </style>
 </head>
 <body>
 <p class="capitalize">اضافه کردن کاربر حقیقی</p>
+<h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+</h1>
 <form class="add" action="/AddRealCustomerServlet" method="get" onsubmit="return validation()">
     <fieldset>
         <legend>لطفا اطلاعات کاربر حقیقی را وارد نمایید</legend>
@@ -68,7 +79,6 @@
 <script>
     function validation() {
         var input = document.getElementsByName("NationalCode")[0].value;
-        alert(input);
         if (input.length!=10) {
             alert("کد ملی باید ۱۰ رقم باشد لطفا مجددا تلاش نمایید");
             return false;

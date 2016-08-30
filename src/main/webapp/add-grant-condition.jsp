@@ -64,17 +64,14 @@
             <div class="box-in">
                 <br>
                 <table>
-                    <%
-                        LoanType loanType = (LoanType) request.getAttribute("loanType");
-                    %>
                     <tr>
                         <td>نام نوع تسهیلات</td>
-                        <td><%=loanType.getLoanTypeName()%>
+                        <td><%=request.getAttribute("loanTypeName")%>
                         </td>
                     </tr>
                     <tr>
                         <td>نرخ سود</td>
-                        <td><%=loanType.getInterestRate()%>
+                        <td><%=request.getAttribute("interestRate")%>
                         </td>
                     </tr>
                 </table>
@@ -108,7 +105,7 @@
                 <br>
                 <br>
                 <form action="/AddGrantConditionServlet" method="get">
-                    <input type="hidden" name="loanType" value="<%=request.getParameter("loanType")%>">
+                    <input type="hidden" name="loanTypeName" value="<%=request.getParameter("loanTypeName")%>">
                     <input type="hidden" name="interestRate" value="<%=request.getParameter("interestRate")%>">
                     <table class="grantConditionTable" id="grantConditionTable"></table>
                     <br>

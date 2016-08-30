@@ -20,11 +20,12 @@ public class AddLoanTypeServlet extends HttpServlet{
         String loanTypeName = request.getParameter("loanTypeName");
         Float interestRate = Float.parseFloat(request.getParameter("interestRate"));
 
-        LoanType loanType;
         try {
-            loanType = LoanTypeValidation.validateLoanTypeFields(loanTypeName, interestRate);
-            request.setAttribute("loanType", loanType);
-            getServletConfig().getServletContext().getRequestDispatcher("/add-grant-condition.jsp").forward(request, response);
+            if (LoanTypeValidation.validateLoanTypeFields(loanTypeName, interestRate)) {
+                request.setAttribute("loanTypeName", loanTypeName);
+                request.setAttribute("interestRate", interestRate);
+                getServletConfig().getServletContext().getRequestDispatcher("/add-grant-condition.jsp").forward(request, response);
+            }
         } catch (NullRequiredFieldException | InvalidEntranceException e) {
             request.setAttribute("header", "لطفا مجددا تلاش نمایید");
             request.setAttribute("text", "\n" + e.getMessage());

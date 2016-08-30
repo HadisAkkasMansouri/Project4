@@ -1,14 +1,17 @@
 package ir.dotin.business;
 
+import ir.dotin.dataaccess.GrantConditionDAO;
 import ir.dotin.dataaccess.entity.GrantCondition;
+import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotInRangeException;
 import ir.dotin.exception.NullRequiredFieldException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GrantConditionValidation {
 
-    public static GrantCondition validateGrantCondition(ArrayList<GrantCondition> grantConditions) throws NullRequiredFieldException, NotInRangeException {
+    public static boolean validateGrantCondition(List<GrantCondition> grantConditions) throws NullRequiredFieldException, NotInRangeException {
 
         for (GrantCondition grantCondition : grantConditions) {
 
@@ -34,6 +37,14 @@ public class GrantConditionValidation {
                 throw new NotInRangeException("حداکثر مبلغ قرداد باید از حداقل مبلغ قرداد بزرگتر باشد");
             }
         }
-        return new GrantCondition();
+        return true;
+    }
+
+    public static void insertGrandConditionByLoanType(LoanType loanType, List<GrantCondition> grantConditions) throws NullRequiredFieldException, NotInRangeException {
+
+        if(validateGrantCondition(grantConditions)){
+            GrantConditionDAO grantConditionDAO = new GrantConditionDAO();
+            grantConditionDAO.insertGrantConditionByLoanType(loanType, grantConditions);
+        }
     }
 }

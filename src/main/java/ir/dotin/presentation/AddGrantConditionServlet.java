@@ -2,6 +2,7 @@ package ir.dotin.presentation;
 
 import ir.dotin.business.GrantConditionValidation;
 import ir.dotin.dataaccess.entity.GrantCondition;
+import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotInRangeException;
 import ir.dotin.exception.NullRequiredFieldException;
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ public class AddGrantConditionServlet extends HttpServlet{
 
         String loanTypeName = request.getParameter("loanTypeName");
         Float interestRate = Float.parseFloat(request.getParameter("interestRate"));
+        LoanType loanType = new LoanType(loanTypeName, interestRate);
 
         int rowCount = Integer.parseInt(request.getParameter("rowCount"));
         ArrayList<GrantCondition> grantConditions = new ArrayList<GrantCondition>();
@@ -38,11 +40,14 @@ public class AddGrantConditionServlet extends HttpServlet{
         }
 
         try {
-            GrantConditionValidation.validateGrantCondition(grantConditions);
-        } catch (NullRequiredFieldException e) {
-            e.printStackTrace();
-        } catch (NotInRangeException e) {
-            e.printStackTrace();
+            if(GrantConditionValidation.validateGrantCondition(grantConditions)){
+                GrantConditionValidation.insertGrandConditionByLoanType(loanType, grantConditions);
+                request.setAttribute("text", "عملیات ثبت نوع تسهیلات با شروط اعطا وارد شده با موفقیت انجام پذیرفت");
+            }
+        } catch (NullRequiredFieldException | NotInRangeException e) {
+            request.setAttribute("text", "\n" + e.getMessage());
+            request.setAttribute("url", "/add-grant-condition.jsp");
+            getServletConfig().getServletContext().getRequestDispatcher("/add-grant-condition.jsp").forward(request, response);
         }
     }
 }

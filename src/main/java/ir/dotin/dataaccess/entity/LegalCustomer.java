@@ -4,14 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "LegalCustomer")
-@AttributeOverrides({
-        @AttributeOverride(name = "id", column = @Column(name = "id"))
-})
+//@AttributeOverrides({
+//        @AttributeOverride(name = "id", column = @Column(name = "id"))
+//})
 public class LegalCustomer extends Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+//    @Column(name = "id")
+    @PrimaryKeyJoinColumn(name="id")
     private int id;
 
     @Column(name = "company_name", nullable = false)

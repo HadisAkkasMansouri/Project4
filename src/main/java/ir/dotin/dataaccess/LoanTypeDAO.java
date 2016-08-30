@@ -1,22 +1,30 @@
 package ir.dotin.dataaccess;
 
 import ir.dotin.dataaccess.entity.LoanType;
+import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.utility.SessionConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
+
 public class LoanTypeDAO {
 
-    public int addLoanType(String loanTypeName, float interestRate) {
+    public static LoanType retrieveLoanType(int loanTypeId) throws NotFoundDataException {
 
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
-        int id = 0;
+        LoanType loanType = null;
         try {
-            transaction = session.beginTransaction();
-            LoanType loanType = new LoanType(loanTypeName, interestRate);
-            id = (int) session.save(loanType);
+            Query query = session.createQuery("from Loantype loan where loan.loanTypeId= :loanTypeId");
+            query.setParameter("loanTypeId", loanTypeId);
+            int result = (int) query.getSingleResult();
+            if (result != 0) {
+                loanType = session.get(LoanType.class, loanTypeId);
+            } else {
+                throw new NotFoundDataException("یافت نشد!" + loanTypeId + "نوع تسهیلاتی با شماره");
+            }
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -25,7 +33,7 @@ public class LoanTypeDAO {
         } finally {
             session.close();
         }
-        return id;
+        return loanType;
     }
 }
 

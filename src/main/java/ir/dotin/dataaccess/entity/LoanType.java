@@ -22,6 +22,12 @@ public class LoanType {
 
     public LoanType(){}
 
+    public LoanType(int loanTypeId, String loanTypeName, float interestRate){
+        this.loanTypeId = loanTypeId;
+        this.loanTypeName = loanTypeName;
+        this.interestRate = interestRate;
+    }
+
     public LoanType(String loanTypeName, float interestRate){
         this.loanTypeName = loanTypeName;
         this.interestRate = interestRate;

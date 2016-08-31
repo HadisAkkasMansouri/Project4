@@ -32,8 +32,8 @@ public class AddGrantConditionServlet extends HttpServlet{
 
             GrantCondition grantCondition = new GrantCondition();
             grantCondition.setGrantConditionName(request.getParameter("grantConditionName" + i));
-            grantCondition.setMinDuration(Integer.parseInt(request.getParameter("minDuration")) + i);
-            grantCondition.setMaxDuration(Integer.parseInt(request.getParameter("maxDuration")) + i);
+            grantCondition.setMinDuration(Integer.parseInt(request.getParameter("minDuration") + i));
+            grantCondition.setMaxDuration(Integer.parseInt(request.getParameter("maxDuration") + i));
             grantCondition.setMinAmount(new BigDecimal((request.getParameter("minAmount")) + i));
             grantCondition.setMaxAmount(new BigDecimal((request.getParameter("maxAmount")) + i));
             grantConditions.add(grantCondition);

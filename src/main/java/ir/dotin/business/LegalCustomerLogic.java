@@ -8,7 +8,7 @@ import ir.dotin.exception.NullRequiredFieldException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CustomerLegalValidation {
+public class LegalCustomerLogic {
 
     public static LegalCustomer validateAddLegalCustomer(String companyName, String economicCode, String registrationDate) throws NullRequiredFieldException, InvalidEntranceException, DuplicateEntranceException {
 

@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-//import ir.dotin.business.CustomerLegalValidation;
+//import ir.dotin.business.LegalCustomerLogic;
 import ir.dotin.dataaccess.entity.LegalCustomer;
 //import ir.dotin.utility.PageGenerator;
 
@@ -22,7 +22,7 @@ public class UpdateLegalCustomerServlet extends HttpServlet {
 
         LegalCustomer legalCustomer = null;
 //        try {
-//            legalCustomer = CustomerLegalValidation.getLegalCustomer(id);
+//            legalCustomer = LegalCustomerLogic.getLegalCustomer(id);
 //            response.getWriter().println(PageGenerator.generateUpdateLegalCustomer(legalCustomer));
 //        } catch (SQLException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));

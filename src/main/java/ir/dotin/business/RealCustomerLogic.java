@@ -7,16 +7,13 @@ import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
 import java.util.List;
 
-public class CustomerRealValidation {
+public class RealCustomerLogic {
 
     public static boolean validateAddRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode) throws NullRequiredFieldException, InvalidEntranceException, DuplicateEntranceException {
-
-
 
         if (name.isEmpty()) {
             throw new NullRequiredFieldException("وارد نمودن فیلد نام الزامی است");
         }
-
         if (familyName.isEmpty()) {
             throw new NullRequiredFieldException("وارد نمودن نام خانوادگی الزامی است");
         }
@@ -37,6 +34,13 @@ public class CustomerRealValidation {
         return true;
 
 }
+
+    public static RealCustomer insertRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode) throws DuplicateEntranceException {
+
+        RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
+        RealCustomer realCustomer = realCustomerDAO.addRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
+        return realCustomer;
+    }
 
     public static RealCustomer validateUpdateRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode, String customerNumber) throws InvalidEntranceException, DuplicateEntranceException {
 

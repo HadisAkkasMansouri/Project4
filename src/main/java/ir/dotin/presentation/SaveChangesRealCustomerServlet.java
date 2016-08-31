@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.CustomerRealValidation;
+import ir.dotin.business.RealCustomerLogic;
 import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
@@ -26,7 +26,7 @@ public class SaveChangesRealCustomerServlet extends HttpServlet {
         String nationalCode = request.getParameter("NationalCode");
         String customerNumber = request.getParameter("CustomerNumber");
 //        try {
-//            RealCustomer realCustomer = CustomerRealValidation.validateUpdateRealCustomer(name, familyName, fatherName, birthDate, nationalCode, customerNumber);
+//            RealCustomer realCustomer = RealCustomerLogic.validateUpdateRealCustomer(name, familyName, fatherName, birthDate, nationalCode, customerNumber);
 //            response.getWriter().println(PageGenerator.generateSaveChangesRealCustomer(realCustomer));
 //        } catch (InvalidEntranceException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));

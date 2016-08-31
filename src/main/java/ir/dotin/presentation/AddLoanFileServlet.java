@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.LoanFileValidation;
+import ir.dotin.business.LoanFileLogic;
 import ir.dotin.exception.NullRequiredFieldException;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class AddLoanFileServlet extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         String customerNumber = request.getParameter("customerNumber");
         try {
-            if(LoanFileValidation.validateCustomerNumber(customerNumber)){
+            if(LoanFileLogic.validateCustomerNumber(customerNumber)){
 
             }
         } catch (NullRequiredFieldException e) {

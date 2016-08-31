@@ -1,7 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.LoanTypeValidation;
-import ir.dotin.dataaccess.entity.LoanType;
+import ir.dotin.business.LoanTypeLogic;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
 import javax.servlet.ServletException;
@@ -21,7 +20,7 @@ public class AddLoanTypeServlet extends HttpServlet{
         Float interestRate = Float.parseFloat(request.getParameter("interestRate"));
 
         try {
-            if (LoanTypeValidation.validateLoanTypeFields(loanTypeName, interestRate)) {
+            if (LoanTypeLogic.validateLoanTypeFields(loanTypeName, interestRate)) {
                 request.setAttribute("loanTypeName", loanTypeName);
                 request.setAttribute("interestRate", interestRate);
                 getServletConfig().getServletContext().getRequestDispatcher("/add-grant-condition.jsp").forward(request, response);

@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-//import ir.dotin.business.CustomerLegalValidation;
+//import ir.dotin.business.LegalCustomerLogic;
 import ir.dotin.dataaccess.entity.LegalCustomer;
 //import ir.dotin.utility.PageGenerator;
 
@@ -22,7 +22,7 @@ public class SearchLegalCustomerServlet extends HttpServlet {
         String economicCode = request.getParameter("EconomicCode");
         String legalCustomerNumber = request.getParameter("LegalCustomerNumber");
 
-//        List<LegalCustomer> legalCustomers = CustomerLegalValidation.searchLegalCustomer(companyName, economicCode, legalCustomerNumber);
+//        List<LegalCustomer> legalCustomers = LegalCustomerLogic.searchLegalCustomer(companyName, economicCode, legalCustomerNumber);
 //        response.getWriter().println(PageGenerator.generateSearchOfLegalCustomerHTML(legalCustomers));
     }
 }

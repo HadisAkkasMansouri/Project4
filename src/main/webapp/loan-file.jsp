@@ -1,4 +1,4 @@
-<%@ page import="ir.dotin.business.CustomerRealValidation" %>
+<%@ page import="ir.dotin.business.RealCustomerLogic" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="fa">
 <head>

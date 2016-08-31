@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.CustomerRealValidation;
+import ir.dotin.business.RealCustomerLogic;
 import ir.dotin.dataaccess.entity.RealCustomer;
 //import ir.dotin.utility.PageGenerator;
 
@@ -21,7 +21,7 @@ public class UpdateRealCustomerServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("ID"));
         RealCustomer realCustomer;
 //        try {
-//            realCustomer = CustomerRealValidation.getRealCustomer(id);
+//            realCustomer = RealCustomerLogic.getRealCustomer(id);
 //            response.getWriter().println(PageGenerator.generateUpdateRealCustomer(realCustomer));
 //        } catch (SQLException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));

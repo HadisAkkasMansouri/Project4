@@ -2,7 +2,7 @@ package ir.dotin.business;
 
 import ir.dotin.exception.NullRequiredFieldException;
 
-public class LoanFileValidation {
+public class LoanFileLogic {
 
     public static boolean validateCustomerNumber(String customerNumber) throws NullRequiredFieldException {
 

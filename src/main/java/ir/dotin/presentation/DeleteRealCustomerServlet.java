@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.CustomerRealValidation;
+import ir.dotin.business.RealCustomerLogic;
 //import ir.dotin.utility.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class DeleteRealCustomerServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("ID"));
 
-//        if(CustomerRealValidation.deleteRealCustomer(id)){
+//        if(RealCustomerLogic.deleteRealCustomer(id)){
 //            response.getWriter().println(PageGenerator.generateresultPage("اطلاعات مشتری حقیقی وارد شده با موفقیت حذف شد"));
 //        }else {
 //            response.getWriter().println(PageGenerator.generateresultPage("خطا! عملیات خذف مشتری حقیقی موفقیت آمیز نبود لطفا مجددا تلاش نمایید"));

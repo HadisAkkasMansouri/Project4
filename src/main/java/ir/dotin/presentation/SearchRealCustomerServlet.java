@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.CustomerRealValidation;
+import ir.dotin.business.RealCustomerLogic;
 import ir.dotin.dataaccess.entity.RealCustomer;
 //import ir.dotin.utility.PageGenerator;
 
@@ -23,7 +23,7 @@ public class SearchRealCustomerServlet extends HttpServlet {
         String realCustomerNumber = request.getParameter("RealCustomerNumber");
         String nationalCode = request.getParameter("NationalCode");
 
-//        List<RealCustomer> realCustomers = CustomerRealValidation.searchRealCustomer(name, familyName, nationalCode, realCustomerNumber);
+//        List<RealCustomer> realCustomers = RealCustomerLogic.searchRealCustomer(name, familyName, nationalCode, realCustomerNumber);
 //        response.getWriter().println(PageGenerator.generateSearchOfRealCustomerHTML(realCustomers));
     }
 }

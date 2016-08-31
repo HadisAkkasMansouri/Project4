@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-import ir.dotin.business.GrantConditionValidation;
+import ir.dotin.business.GrantConditionLogic;
 import ir.dotin.dataaccess.entity.GrantCondition;
 import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotInRangeException;
@@ -40,8 +40,8 @@ public class AddGrantConditionServlet extends HttpServlet{
         }
 
         try {
-            if(GrantConditionValidation.validateGrantCondition(grantConditions)){
-                GrantConditionValidation.insertGrandConditionByLoanType(loanType, grantConditions);
+            if(GrantConditionLogic.validateGrantCondition(grantConditions)){
+                GrantConditionLogic.insertGrandConditionByLoanType(loanType, grantConditions);
                 request.setAttribute("text", "عملیات ثبت نوع تسهیلات با شروط اعطا وارد شده با موفقیت انجام پذیرفت");
             }
         } catch (NullRequiredFieldException | NotInRangeException e) {

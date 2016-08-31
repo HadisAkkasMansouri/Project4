@@ -3,7 +3,7 @@ package ir.dotin.business;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
 
-public class LoanTypeValidation {
+public class LoanTypeLogic {
 
     public static boolean validateLoanTypeFields(String loanTypeName, Float interestRate) throws NullRequiredFieldException, InvalidEntranceException {
 

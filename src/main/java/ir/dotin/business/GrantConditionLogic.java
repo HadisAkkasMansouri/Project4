@@ -9,7 +9,7 @@ import ir.dotin.exception.NullRequiredFieldException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrantConditionValidation {
+public class GrantConditionLogic {
 
     public static boolean validateGrantCondition(List<GrantCondition> grantConditions) throws NullRequiredFieldException, NotInRangeException {
 

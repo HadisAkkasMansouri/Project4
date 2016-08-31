@@ -1,6 +1,6 @@
 package ir.dotin.presentation;
 
-//import ir.dotin.business.CustomerLegalValidation;
+//import ir.dotin.business.LegalCustomerLogic;
 //import ir.dotin.utility.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class DeleteLegalCustomerServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         int id = Integer.valueOf(request.getParameter("ID"));
 //
-//        if(CustomerLegalValidation.deleteLegalCustomer(id)){
+//        if(LegalCustomerLogic.deleteLegalCustomer(id)){
 //            response.getWriter().println(PageGenerator.generateresultPage("اطلاعات مشتری حقوقی وارد شده با موفقیت حذف شد"));
 //        }else {
 //            response.getWriter().println(PageGenerator.generateresultPage("خطا! عملیات خذف مشتری حقوقی موفقیت آمیز نبود لطفا مجددا تلاش نمایید"));

@@ -1,6 +1,7 @@
 package ir.dotin.presentation;
 
 //import ir.dotin.business.LegalCustomerLogic;
+import ir.dotin.business.LegalCustomerLogic;
 import ir.dotin.dataaccess.entity.LegalCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
@@ -24,7 +25,7 @@ public class AddLegalCustomerServlet extends HttpServlet {
         String economicCode = request.getParameter("EconomicCode");
         String registrationDate = request.getParameter("RegistrationDate");
 //        try {
-//            LegalCustomer legalCustomer = CLegalCustomerLogic.validateAddLegalCustomer(companyName, economicCode, registrationDate);
+//            LegalCustomer legalCustomer = LegalCustomerLogic.validateAddLegalCustomer(companyName, economicCode, registrationDate);
 //            response.getWriter().println(PageGenerator.generateAddLegalCustomerPage(legalCustomer));
 //        } catch (InvalidEntranceException e) {
 //            response.getWriter().println(PageGenerator.generateresultPage(e.getMessage()));

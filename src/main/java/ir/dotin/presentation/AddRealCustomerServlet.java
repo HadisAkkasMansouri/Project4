@@ -1,12 +1,10 @@
 package ir.dotin.presentation;
 
 import ir.dotin.business.RealCustomerLogic;
-import ir.dotin.dataaccess.RealCustomerDAO;
 import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

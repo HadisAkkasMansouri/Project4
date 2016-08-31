@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>addRealCustomer</title>
+    <script>
+        function validation() {
+            var loanTypeName = document.getElementById("loanTypeName").value;
+            var interestRate = document.getElementById("interestRate").value;
+            if(loanTypeName == "" || interestRate == ""){
+                alert("پر کردن تمامی فیلد های ");
+            }
+        }
+    </script>
     <style>
 
         body {
             background-color: black;
-            font-family: B Nazanin;
+            font-family: "B Nazanin";
         }
 
         div {
-            font-family: B Nazanin;
+            font-family: "B Nazanin";
         }
 
         .capitalize {
@@ -54,14 +63,14 @@
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
-<form class="add" action="/AddLoanTypeServlet" method="get">
+<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit="return validation()">
     <fieldset>
         <legend>لطفا اطلاعات نوع تسهیلات کاربر حقیقی را وارد نمایید</legend>
         نام نوع تسهیلات <br>
-        <input type="text" name="loanTypeName">
+        <input type="text" name="loanTypeName" id="loanTypeName">
         <br>
         نرخ سود <br>
-        <input type="text" name="interestRate">
+        <input type="text" name="interestRate" id="interestRate">
         <br><br>
         <button type="submit" value="registrationInformation"><b>اضافه کردن شرایط اعطا</b></button>
     </fieldset>

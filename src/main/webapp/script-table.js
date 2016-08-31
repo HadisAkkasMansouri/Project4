@@ -59,7 +59,7 @@ function addRowTable() {
             var footer = grantConditionTable.createTFoot();
             var footerRow = footer.insertRow(0);
             var cell = footerRow.insertCell(0);
-            cell.innerHTML = '<input type="submit" class="button" value="ثبت اطلاعات"> <input type="text" name="rowCount" value="' + grantConditionTable.rows.length + '" hidden>';
+            cell.innerHTML = '<input type="submit" class="submitButton" value="ثبت نهایی اطلاعات"> <input type="text" name="rowCount" value="' + grantConditionTable.rows.length + '" hidden>';
         }
     }
     

@@ -50,7 +50,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddGrantConditionServlet</servlet-name>
-        <servlet-class>ir.dotin.presentation.AddGrantDonditionServlet</servlet-class>
+        <servlet-class>ir.dotin.presentation.AddGrantConditionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddLoanFileServlet</servlet-name>

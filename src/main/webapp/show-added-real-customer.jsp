@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ir.dotin.dataaccess.entity.RealCustomer" %>
-<%@ page import="java.util.ArrayList" %>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
@@ -16,13 +15,15 @@
         }
 
         .capitalize {
-            font-size: 3.8em;
+            font-size: 2.8em;
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
             top: 7%;
             margin-right: 3cm;
+            direction: rtl;
         }
+
         .form {
             font-weight: bold;
             position: absolute;
@@ -30,6 +31,19 @@
             bottom: 15%;
             z-index: -1;
             color: cornsilk;
+        }
+
+        .table {
+            color: #fff8dc  ;
+            background-color: #b8860b;
+            position: absolute;
+            right:7%;
+            top:40%;
+            text-align: right;
+            font-weight: bold;
+            font-family: B Nazanin;
+            vertical-align: middle;
+            border-bottom: 1px solid #fff8dc;
         }
     </style>
 </head>
@@ -46,8 +60,8 @@
                 <%
                     RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");
                 %>
-                <p class="capitalize">مشتری حقیقی به شرح زیر با موفقیت٬ ذخیره شد</p>
-                <table table style="color: darkgoldenrod">
+                <h1 class="capitalize">مشتری حقیقی به شرح زیر با موفقیت٬ ذخیره شد</h1>
+                <table class="table">
                     <thead>
                     <tr>
                         <th>
@@ -71,7 +85,6 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     <tr>
                         <td>
                             <%=realCustomer.getCustomerNumber()%>

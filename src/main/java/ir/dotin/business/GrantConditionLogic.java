@@ -5,8 +5,6 @@ import ir.dotin.dataaccess.entity.GrantCondition;
 import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotInRangeException;
 import ir.dotin.exception.NullRequiredFieldException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class GrantConditionLogic {

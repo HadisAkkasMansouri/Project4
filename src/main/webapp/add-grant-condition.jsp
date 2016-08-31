@@ -1,27 +1,40 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="ir.dotin.dataaccess.entity.LoanType" %>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="/table-script.js"></script>
+    <script type="text/javascript" src="/script-table.js"></script>
+    <script type="text/javascript">
+        function validateInputs() {
+
+            var grantConditionName = document.getElementById("grantConditionName").value;
+            var minDuration = document.getElementById("minDuration").value;
+            var maxDuration = document.getElementById("maxDuration").value;
+            var minAmount = document.getElementById("minAmount").value;
+            var maxAmount = document.getElementById("maxAmount").value;
+            if(grantConditionName == "" || minAmount == "" || maxAmount == "" || minDuration == "" || maxDuration == ""){
+                alert("پر کردن تمامی فیلدهای شروط اعطا الزامی است !");
+            }else {
+                addRowTable();
+            }
+        }
+    </script>
     <title>addRealCustomer</title>
     <style>
 
         body {
             background-color: black;
-            font-family: B Nazanin;
+            font-family: "B Nazanin";
         }
 
         div {
-            font-family: B Nazanin;
+            font-family: "B Nazanin";
         }
 
         .capitalize {
-            font-size: 3.8em;
             color: cornsilk;
             text-align: right;
             line-height: 2.8;
-            top: 7%;
+            top: 30%;
             margin-right: 3cm;
         }
 
@@ -30,8 +43,13 @@
             color: white;
             text-align: center;
             background-color: darkgoldenrod;
+            position: absolute;
+            top:25%;
+            right:8%;
+            font-weight: bold;
+            border: solid darkgoldenrod;
+            direction: rtl;
         }
-
         .form {
             font-weight: bold;
             position: absolute;
@@ -50,11 +68,34 @@
             line-height: 1.8;
         }
 
+        .button{
+            position: absolute;
+            right:9%;
+            top:50%;
+            text-align: center;
+            font-weight: bold;
+            background-color: khaki;
+            color: brown;
+            font-family: "B Nazanin";
+        }
+
+        .submitButton{
+            position: absolute;
+            right:16%;
+            top:50%;
+            text-align: center;
+            font-weight: bold;
+            background-color: khaki;
+            color: brown;
+            font-family: "B Nazanin";
+        }
+
     </style>
 </head>
 <body>
 <div>
     <h1 class="capitalize">اضافه کردن شروط اعطا</h1>
+    <h4 class="capitalize">: لطفا شروط اعطای تسهیلات مورد نظر را وارد کنید</h4>
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
@@ -75,9 +116,7 @@
                         </td>
                     </tr>
                 </table>
-                <fieldset class="add">
-                    <legend>لطفا اطلاعات شروط اعطا را وارد نمایید</legend>
-                    <table>
+                    <table class="add">
                         <tr>
                             <td>نام</td>
                             <td><input type="text" id="grantConditionName"></td>
@@ -99,9 +138,8 @@
                             <td><input type="text" id="maxAmount"></td>
                         </tr>
                     </table>
-                    <button type="submit" value="registrationInformation" onclick="addRowTable()"><b>ثبت اطاعات</b>
-                    </button>
-                </fieldset>
+                    <input class="button" type="button" value="شرط اعطا بعدی" onclick="validateInputs()">
+                    </input>
                 <br>
                 <br>
                 <form action="/AddGrantConditionServlet" method="get">
@@ -111,7 +149,7 @@
                     <br>
                 </form>
                 <div>
-                    <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
+                    <td><a href="/loan.jsp" class="form">صفحه قبل <<</a></td>
                 </div>
             </div>
         </div>

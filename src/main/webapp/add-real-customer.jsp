@@ -23,7 +23,6 @@
             margin-right: 3cm;
         }
 
-
         .add {
             color: white;
             text-align: center;
@@ -58,30 +57,37 @@
     <fieldset>
         <legend>لطفا اطلاعات کاربر حقیقی را وارد نمایید</legend>
         نام <br>
-        <input type="text" name="Name">
+        <input type="text" name="Name" id="Name">
         <br>
         نام خانوادگی <br>
-        <input type="text" name="FamilyName">
+        <input type="text" name="FamilyName" id="FamilyName">
         <br>
         نام پدر <br>
-        <input type="text" name="FatherName">
+        <input type="text" name="FatherName" id="FatherName">
         <br>
         تاریخ تولد <br>
-        <input type="text" name="BirthDate">
+        <input type="text" name="BirthDate" id="BirthDate">
         <br>
         کد ملی <br>
-        <input type="text" name="NationalCode">
+        <input type="text" name="NationalCode" id="NationalCode">
         <br><br>
         <button type="submit" value="RegistrateInformation"><b>ثبت اطاعات</b></button>
     </fieldset>
 </form>
 <div>
-    <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
+    <td><a href="/index.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
     function validation() {
-        var input = document.getElementsByName("NationalCode")[0].value;
-        if (input.length!=10) {
+        var name = document.getElementById("Name").value;
+        var familyName = document.getElementById("FamilyName").value;
+        var fatherName = document.getElementById("FatherName").value;
+        var birthDate = document.getElementById("BirthDate").value;
+        var nationalCode = document.getElementById("NationalCode").value;
+        if(nationalCode == "" || name == "" || familyName == "" || fatherName == "" || birthDate == ""){
+            alert("پر کردن تمامی فیلد های کاربر حقیقی الزامی است !");
+        }
+        if (nationalCode.length!=10) {
             alert("کد ملی باید ۱۰ رقم باشد لطفا مجددا تلاش نمایید");
             return false;
         }

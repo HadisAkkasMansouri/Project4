@@ -9,40 +9,34 @@ import java.util.List;
 
 public class CustomerRealValidation {
 
-    public static RealCustomer validateAddRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode) throws NullRequiredFieldException, InvalidEntranceException, DuplicateEntranceException {
+    public static boolean validateAddRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode) throws NullRequiredFieldException, InvalidEntranceException, DuplicateEntranceException {
 
-        RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
-        if (!name.isEmpty()) {
 
-            if (!familyName.isEmpty()) {
 
-                if (!fatherName.isEmpty()) {
-
-                    if (!birthDate.isEmpty()) {
-
-                        if (!nationalCode.isEmpty()) {
-
-                            if (nationalCode.length() == 10) {
-                                RealCustomer realCustomer = realCustomerDAO.addRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
-                                return realCustomer;
-                            }
-                            throw new InvalidEntranceException("کد ملی وارد شده صحیح نمی باشد لطفا مجددا تلاش نمایید");
-                        } else {
-                            throw new NullRequiredFieldException("وارد نمودن کد ملی الزامی است");
-                        }
-                    } else {
-                        throw new NullRequiredFieldException("وارد نمودن تاریخ تولد الزامی است");
-                    }
-                } else {
-                    throw new NullRequiredFieldException("وارد نمودن نام پدر الزامی است");
-                }
-            } else {
-                throw new NullRequiredFieldException("وارد نمودن نام خانوادگی الزامی است");
-            }
-        } else {
+        if (name.isEmpty()) {
             throw new NullRequiredFieldException("وارد نمودن فیلد نام الزامی است");
         }
-    }
+
+        if (familyName.isEmpty()) {
+            throw new NullRequiredFieldException("وارد نمودن نام خانوادگی الزامی است");
+        }
+        if (fatherName.isEmpty()) {
+            throw new NullRequiredFieldException("وارد نمودن نام پدر الزامی است");
+        }
+        if (birthDate.isEmpty()) {
+            throw new NullRequiredFieldException("وارد نمودن تاریخ تولد الزامی است");
+        }
+
+        if (nationalCode.isEmpty()) {
+            throw new NullRequiredFieldException("وارد نمودن کد ملی الزامی است");
+        }
+
+        if (nationalCode.length() != 10) {
+            throw new InvalidEntranceException("کد ملی وارد شده صحیح نمی باشد لطفا مجددا تلاش نمایید");
+        }
+        return true;
+
+}
 
     public static RealCustomer validateUpdateRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode, String customerNumber) throws InvalidEntranceException, DuplicateEntranceException {
 
@@ -78,7 +72,7 @@ public class CustomerRealValidation {
         return realCustomer;
     }
 
-    public static RealCustomer getRealCustomerInfo(String customerNumber){
+    public static RealCustomer getRealCustomerInfo(String customerNumber) {
 
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
         RealCustomer realCustomer = realCustomerDAO.retrieveRealCustomerName(customerNumber);

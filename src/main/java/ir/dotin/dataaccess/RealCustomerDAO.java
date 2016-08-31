@@ -7,7 +7,6 @@ import ir.dotin.utility.SessionConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +47,10 @@ public class RealCustomerDAO extends Customer {
         try {
             int customerNum = CustomerDAO.retrieveMaxCustomerNumber();
             String customerNumber = String.valueOf(customerNum);
-            int id = CustomerDAO.addCustomer(customerNumber);
             transaction = session.beginTransaction();
             if (checkUniqueRealNationalCode(nationalCode)) {
-                realCustomer = new RealCustomer(id, name, familyName, fatherName, birthDate, nationalCode);
-                realCustomer = (RealCustomer) session.save(realCustomer);
-                realCustomer.setCustomerNumber(customerNumber);
+                realCustomer = new RealCustomer( customerNumber, name, familyName, fatherName, birthDate, nationalCode);
+                session.save(realCustomer);
                 transaction.commit();
             }
         } catch (HibernateException e) {
@@ -211,7 +208,7 @@ public class RealCustomerDAO extends Customer {
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("from RealCustomer rc where rc.id= :id");
+            Query query = session.createQuery("select rc from RealCustomer rc where rc.id= :id");
             query.setParameter("id", id);
             Object result = query.getFirstResult();
             realCustomer = (RealCustomer) result;

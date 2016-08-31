@@ -16,7 +16,7 @@ public class CustomerDAO {
         int id = retrieveMaxId();
         try {
             transaction = session.beginTransaction();
-            Customer customer = new Customer(id, customerNumber);
+            Customer customer = new Customer( customerNumber);
             id = (Integer) session.save(customer);
             transaction.commit();
         } catch (HibernateException e) {

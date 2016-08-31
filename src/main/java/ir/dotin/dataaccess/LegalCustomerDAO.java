@@ -45,9 +45,8 @@ public class LegalCustomerDAO {
         try {
             int customerNum = CustomerDAO.retrieveMaxCustomerNumber();
             String customerNumber = String.valueOf(customerNum);
-            int id = CustomerDAO.addCustomer(customerNumber);
             if (checkUniqueLegalEconomicCode(economicCode)) {
-                legalCustomer = new LegalCustomer(id, companyName, registrationDate, economicCode);
+                legalCustomer = new LegalCustomer(customerNumber, companyName, registrationDate, economicCode);
                 legalCustomer = (LegalCustomer) session.save(legalCustomer);
                 transaction.commit();
             }

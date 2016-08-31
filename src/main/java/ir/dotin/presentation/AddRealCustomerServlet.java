@@ -1,6 +1,7 @@
 package ir.dotin.presentation;
 
 import ir.dotin.business.CustomerRealValidation;
+import ir.dotin.dataaccess.RealCustomerDAO;
 import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
@@ -24,9 +25,14 @@ public class AddRealCustomerServlet extends HttpServlet {
         String birthDate = request.getParameter("BirthDate");
         String nationalCode = request.getParameter("NationalCode");
         try {
-            RealCustomer realCustomer = CustomerRealValidation.validateAddRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
+            RealCustomer realCustomer = new RealCustomer();
+            if(CustomerRealValidation.validateAddRealCustomer(name, familyName, fatherName, birthDate, nationalCode))
+            {
+                RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
+                realCustomer = realCustomerDAO.addRealCustomer(name, familyName, fatherName, birthDate, nationalCode);
+            };
             request.setAttribute("realCustomer" , realCustomer);
-            getServletConfig().getServletContext().getRequestDispatcher("show-added-real-customer.jsp").forward(request, response);
+            getServletConfig().getServletContext().getRequestDispatcher("/show-added-real-customer.jsp").forward(request, response);
         } catch (InvalidEntranceException | NullRequiredFieldException | DuplicateEntranceException e) {
             request.setAttribute("text", "\n" + e.getMessage());
             getServletConfig().getServletContext().getRequestDispatcher("/add-real-customer.jsp").forward(request, response);

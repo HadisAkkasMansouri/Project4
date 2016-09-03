@@ -8,7 +8,7 @@
             var loanTypeName = document.getElementById("loanTypeName").value;
             var interestRate = document.getElementById("interestRate").value;
             if(loanTypeName == "" || interestRate == ""){
-                alert("پر کردن تمامی فیلد های ");
+                alert("پر کردن تمامی فیلد های انواع تسهیلات الزامی است !");
             }
         }
     </script>

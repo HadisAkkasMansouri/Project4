@@ -75,7 +75,7 @@
             <a href="loan-type.jsp">انواع تسهیلات</a>
             <br>
             <br>
-            <a href="loan-file.jsp">پرونده تسهیلاتی</a>
+            <a href="add-loan-file.jsp">پرونده تسهیلاتی</a>
             <br>
             <br>
             <br>

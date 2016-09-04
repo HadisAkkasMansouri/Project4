@@ -46,6 +46,7 @@ public class AddGrantConditionServlet extends HttpServlet {
                 getServletConfig().getServletContext().getRequestDispatcher("/final-operation-page.jsp").forward(request, response);
             }
         } catch (NullRequiredFieldException | NotInRangeException e) {
+            request.setAttribute("header", "لطفا مجددا تلاش نمایید");
             request.setAttribute("text", "\n" + e.getMessage());
             getServletConfig().getServletContext().getRequestDispatcher("/add-grant-condition.jsp").forward(request, response);
         }

@@ -7,9 +7,10 @@ import java.util.List;
 @Table(name = "LoanType")
 public class LoanType {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
-    private int loanTypeId;
+    private int id;
 
     @Column(name = "loan_type_name", unique = true, nullable = false)
     private String loanTypeName;
@@ -17,24 +18,27 @@ public class LoanType {
     @Column(name = "interest_rate", nullable = false)
     private float interestRate;
 
-    @OneToMany(mappedBy = "loanTypeId")
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "loanTypeId")
     private List<GrantCondition> grantConditions;
 
-    public LoanType(){}
+    public LoanType() {
+    }
 
-    public LoanType(int loanTypeId, String loanTypeName, float interestRate){
-        this.loanTypeId = loanTypeId;
+    public LoanType(int loanTypeId, String loanTypeName, float interestRate) {
+        this.id = loanTypeId;
         this.loanTypeName = loanTypeName;
         this.interestRate = interestRate;
     }
 
-    public LoanType(String loanTypeName, float interestRate){
+    public LoanType(String loanTypeName, float interestRate) {
         this.loanTypeName = loanTypeName;
         this.interestRate = interestRate;
     }
 
-    public int getLoanTypeId() {
-        return loanTypeId;
+    public int getId() {
+        return id;
     }
 
     public String getLoanTypeName() {
@@ -49,8 +53,8 @@ public class LoanType {
         return grantConditions;
     }
 
-    public void setLoanTypeId(int loanTypeId) {
-        this.loanTypeId = loanTypeId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setLoanTypeName(String loanTypeName) {

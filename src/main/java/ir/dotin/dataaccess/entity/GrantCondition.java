@@ -26,6 +26,7 @@ public class GrantCondition {
     @Column(name = "maximum_amount", nullable = false)
     private BigDecimal maxAmount;
 
+    @Column(name = "loan_type_id")
     private int loanTypeId;
 
     public GrantCondition(){}

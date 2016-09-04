@@ -53,7 +53,7 @@
 <h1 class="capitalize">اضافه کردن کاربر حقیقی</h1>
 <h1 class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
 </h1>
-<form class="add" action="/AddRealCustomerServlet" method="get" onsubmit="return validation()">
+<form class="add" action="/AddRealCustomerServlet" method="get" <%--onsubmit="return validation()--%>>
     <fieldset>
         <legend>لطفا اطلاعات کاربر حقیقی را وارد نمایید</legend>
         نام <br>

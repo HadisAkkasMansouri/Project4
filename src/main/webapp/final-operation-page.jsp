@@ -43,7 +43,6 @@
         }
 
     </style>
-
     <h class="capitalize"><%=request.getAttribute("header") == null ? "": (String)request.getAttribute("header")%></h>
     <p class="text"><%=request.getAttribute("text") == null ? "": (String)request.getAttribute("text")%></p>
 </head>

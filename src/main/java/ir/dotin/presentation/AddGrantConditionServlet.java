@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class AddGrantConditionServlet extends HttpServlet{
+public class AddGrantConditionServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -28,21 +28,22 @@ public class AddGrantConditionServlet extends HttpServlet{
         int rowCount = Integer.parseInt(request.getParameter("rowCount"));
         ArrayList<GrantCondition> grantConditions = new ArrayList<GrantCondition>();
 
-        for( int i=1; i <rowCount -1 ; i++){
+        for (int i = 1; i <= rowCount; i++) {
 
             GrantCondition grantCondition = new GrantCondition();
             grantCondition.setGrantConditionName(request.getParameter("grantConditionName" + i));
-            grantCondition.setMinDuration(Integer.parseInt(request.getParameter("minDuration") + i));
-            grantCondition.setMaxDuration(Integer.parseInt(request.getParameter("maxDuration") + i));
-            grantCondition.setMinAmount(new BigDecimal((request.getParameter("minAmount")) + i));
-            grantCondition.setMaxAmount(new BigDecimal((request.getParameter("maxAmount")) + i));
+            grantCondition.setMinDuration(Integer.parseInt(request.getParameter("minDuration" + i)));
+            grantCondition.setMaxDuration(Integer.parseInt(request.getParameter("maxDuration" + i)));
+            grantCondition.setMinAmount(new BigDecimal((request.getParameter("minAmount" + i))));
+            grantCondition.setMaxAmount(new BigDecimal((request.getParameter("maxAmount" + i))));
             grantConditions.add(grantCondition);
         }
 
         try {
-            if(GrantConditionLogic.validateGrantCondition(grantConditions)){
+            if (GrantConditionLogic.validateGrantCondition(grantConditions)) {
                 GrantConditionLogic.insertGrandConditionByLoanType(loanType, grantConditions);
-                request.setAttribute("text", "عملیات ثبت نوع تسهیلات با شروط اعطا وارد شده با موفقیت انجام پذیرفت");
+                request.setAttribute("text", "عملیات ثبت نوع تسهیلات " +"\""+ loanTypeName +"\"" + " با شروط اعطا وارد شده با موفقیت انجام پذیرفت");
+                getServletConfig().getServletContext().getRequestDispatcher("/final-operation-page.jsp").forward(request, response);
             }
         } catch (NullRequiredFieldException | NotInRangeException e) {
             request.setAttribute("text", "\n" + e.getMessage());

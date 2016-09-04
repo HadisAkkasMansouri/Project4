@@ -22,7 +22,6 @@ function addRowTable() {
         row.insertCell(4).innerHTML = '<input type ="text" name = "minAmount' + rowCount + '" value="' + minAmount.value + '" readonly >';
         row.insertCell(5).innerHTML = '<input type ="text" name = "maxAmount' + rowCount + '" value="' + maxAmount.value + '" readonly >';
     }
-    // addTableFooter();
 
     document.getElementById("rowCount").value = rowCount;
     document.getElementById("grantConditionName").value = "";
@@ -55,15 +54,5 @@ function addRowTable() {
         headerRowTable.appendChild(headerCell);
         headerCell = document.createElement("TH");
         grantConditionTable.appendChild(headerRowTable);
-    }
-
-    function addTableFooter() {
-        var grantConditionTable = document.getElementById("grantConditionTable");
-        if (!grantConditionTable.tFoot) {
-            var footer = grantConditionTable.createTFoot();
-            var footerRow = footer.insertRow(0);
-            var cell = footerRow.insertCell(0);
-            cell.innerHTML = '<!--<input type="button" class="submitButton" value="ثبت نهایی اطلاعات" onclick="document.forms[0].submit();">--> <input type="text" name="rowCount" onclick="document.forms[0].submit(); value="' + grantConditionTable.rows.length + '" hidden>';
-        }
     }
 }

@@ -28,10 +28,10 @@ public class GrantConditionLogic {
             if (grantCondition.getMaxDuration() == 0) {
                 throw new NullRequiredFieldException("وارد نمودن فیلد حداکثر مدت قرارداد الزامی است");
             }
-            if (grantCondition.getMinDuration() > grantCondition.getMaxDuration()){
+            if (grantCondition.getMaxDuration() <= grantCondition.getMinDuration()){
                 throw new NotInRangeException("حداکثر مدت قرداد باید از حداقل مدت قرداد بزرگتر باشد");
             }
-            if ((grantCondition.getMinAmount().compareTo(grantCondition.getMaxAmount())) <= 0){
+            if ((grantCondition.getMinAmount().compareTo(grantCondition.getMaxAmount())) >= 0){
                 throw new NotInRangeException("حداکثر مبلغ قرداد باید از حداقل مبلغ قرداد بزرگتر باشد");
             }
         }

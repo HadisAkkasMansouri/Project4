@@ -13,13 +13,11 @@ import java.util.List;
 
 public class LegalCustomerDAO {
 
-    LegalCustomer legalCustomer = new LegalCustomer();
-
     public boolean checkUniqueLegalEconomicCode(String economicCode) throws DuplicateEntranceException {
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try {
-            Query query = session.createQuery("from LegalCustomer lc where lc.economicCode= :economicCode");
+            Query query = session.createQuery("select lc from LegalCustomer lc where lc.economicCode= :economicCode");
             System.out.println(query);
             query.setParameter("economicCode", economicCode);
             Object result = query.getSingleResult();
@@ -42,6 +40,7 @@ public class LegalCustomerDAO {
 
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
+        LegalCustomer legalCustomer = new LegalCustomer();
         try {
             int customerNum = CustomerDAO.retrieveMaxCustomerNumber();
             String customerNumber = String.valueOf(customerNum);
@@ -124,20 +123,15 @@ public class LegalCustomerDAO {
 
     public List<LegalCustomer> searchLegalCustomer(String companyName, String economicCode, String legalCustomerNumber) {
 
-        List<LegalCustomer> legalCustomers = new ArrayList<LegalCustomer>();
+        List<LegalCustomer> result = new ArrayList<LegalCustomer>();
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try {
             Query query = buildLegalCustomerQuery(companyName, economicCode, legalCustomerNumber);
-            List result = query.getResultList();
+            List<LegalCustomer> legalCustomers = query.getResultList();
             transaction.commit();
-            while (result != null) {
-                legalCustomer.getId();
-                legalCustomer.getCompanyName();
-                legalCustomer.getCustomerNumber();
-                legalCustomer.getEconomicCode();
-                legalCustomer.getRegistrationDate();
-                legalCustomers.add(legalCustomer);
+            for (LegalCustomer legalCustomer : legalCustomers) {
+                result.add(legalCustomer);
             }
         } catch (HibernateException e) {
             if (transaction != null) {
@@ -147,10 +141,10 @@ public class LegalCustomerDAO {
         } finally {
             session.close();
         }
-        return legalCustomers;
+        return result;
     }
 
-    public LegalCustomer updateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber) {
+    public LegalCustomer updateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber) throws Exception {
 
         int id = CustomerDAO.retrieveIdByCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
@@ -164,51 +158,27 @@ public class LegalCustomerDAO {
             query.setParameter("id", id);
             query.executeUpdate();
             transaction.commit();
-
-            legalCustomer.setId(id);
-            legalCustomer.setCompanyName(companyName);
-            legalCustomer.setEconomicCode(economicCode);
-            legalCustomer.setRegistrationDate(registrationDate);
-            legalCustomer.setCustomerNumber(customerNumber);
+            return new LegalCustomer(customerNumber, companyName, economicCode, registrationDate);
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
                 e.printStackTrace();
             }
+            throw new Exception("عملیات اصلاح موفقیت آمیز نبود!");
         } finally {
             session.close();
         }
-        return legalCustomer;
     }
 
 
     public LegalCustomer getLegalCustomer(int id) {
 
-        String customerNumber = CustomerDAO.retrieveCustomerNumberById(id);
-        legalCustomer.setCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
-        try {
-            Query query = session.createQuery("from LegalCustomer lc where lc.id= :id");
-            query.setParameter("id", id);
-            Object result = query.getFirstResult();
-            transaction.commit();
-            while (result != null) {
-                legalCustomer.getId();
-                legalCustomer.getCompanyName();
-                legalCustomer.getEconomicCode();
-                legalCustomer.getRegistrationDate();
-                legalCustomer.getCustomerNumber();
-            }
-        } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
-        } finally {
-            session.close();
-        }
-        return legalCustomer;
+        Query query = session.createQuery("select lc from LegalCustomer lc where lc.id= :id");
+        query.setParameter("id", id);
+        Object result = query.getFirstResult();
+        return (LegalCustomer) result;
+
     }
 }
 

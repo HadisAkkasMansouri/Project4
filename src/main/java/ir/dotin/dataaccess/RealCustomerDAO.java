@@ -13,8 +13,6 @@ import java.util.List;
 
 public class RealCustomerDAO extends Customer {
 
-    RealCustomer realCustomer = new RealCustomer();
-
     public boolean checkUniqueRealNationalCode(String nationalCode) throws DuplicateEntranceException {
 
         Session session = SessionConnection.getSessionConnection().openSession();
@@ -44,12 +42,13 @@ public class RealCustomerDAO extends Customer {
 
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
+        RealCustomer realCustomer = new RealCustomer();
         try {
             int customerNum = CustomerDAO.retrieveMaxCustomerNumber();
             String customerNumber = String.valueOf(customerNum);
             transaction = session.beginTransaction();
             if (checkUniqueRealNationalCode(nationalCode)) {
-                realCustomer = new RealCustomer( customerNumber, name, familyName, fatherName, birthDate, nationalCode);
+                realCustomer = new RealCustomer(customerNumber, name, familyName, fatherName, birthDate, nationalCode);
                 session.save(realCustomer);
                 transaction.commit();
             }
@@ -135,36 +134,24 @@ public class RealCustomerDAO extends Customer {
 
     public List<RealCustomer> searchRealCustomer(String name, String familyName, String nationalCode, String customerNumber) {
 
-        List<RealCustomer> realCustomers = new ArrayList<RealCustomer>();
+        List<RealCustomer> result = new ArrayList<RealCustomer>();
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
+
         try {
-            transaction = session.beginTransaction();
             Query query = buildRealCustomerQuery(name, familyName, nationalCode, customerNumber);
-            List result = query.getResultList();
-            transaction.commit();
-            while (result != null) {
-                realCustomer.getId();
-                realCustomer.getName();
-                realCustomer.getFamilyName();
-                realCustomer.getFatherName();
-                realCustomer.getBirthDate();
-                realCustomer.getNationalCode();
-                realCustomer.getCustomerNumber();
-                realCustomers.add(realCustomer);
+            List<RealCustomer> realCustomers = query.getResultList();
+            for (RealCustomer realCustomer : realCustomers) {
+                result.add(realCustomer);
             }
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
                 e.printStackTrace();
-            }
         } finally {
             session.close();
         }
-        return realCustomers;
+        return result;
     }
 
-    public RealCustomer updateRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode, String customerNumber) {
+    public RealCustomer updateRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode, String customerNumber) throws Exception {
 
         int id = CustomerDAO.retrieveIdByCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
@@ -181,79 +168,34 @@ public class RealCustomerDAO extends Customer {
             query.setParameter("id", id);
             query.executeUpdate();
             transaction.commit();
-
-            realCustomer.getId();
-            realCustomer.getName();
-            realCustomer.getFamilyName();
-            realCustomer.getFatherName();
-            realCustomer.getBirthDate();
-            realCustomer.getNationalCode();
-            realCustomer.getCustomerNumber();
+            return new RealCustomer(customerNumber, name, familyName, fatherName, birthDate, nationalCode);
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
                 e.printStackTrace();
             }
+            throw new Exception("عملیات اصلاح موفقیت آمیز نبود!");
         } finally {
             session.close();
         }
-        return realCustomer;
     }
 
     public RealCustomer getRealCustomer(int id) {
 
-        String customerNumber = CustomerDAO.retrieveCustomerNumberById(id);
-        realCustomer.setCustomerNumber(customerNumber);
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("select rc from RealCustomer rc where rc.id= :id");
-            query.setParameter("id", id);
-            Object result = query.getFirstResult();
-            realCustomer = (RealCustomer) result;
-            transaction.commit();
-            while (result != null) {
-                realCustomer.getId();
-                realCustomer.getName();
-                realCustomer.getFamilyName();
-                realCustomer.getFatherName();
-                realCustomer.getBirthDate();
-                realCustomer.getNationalCode();
-                realCustomer.getCustomerNumber();
-            }
-        } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
-        } finally {
-            session.close();
-        }
-        return realCustomer;
+        Query query = session.createQuery("select rc from RealCustomer rc where rc.id= :id");
+        query.setParameter("id", id);
+        Object realCustomer = query.getFirstResult();
+        return (RealCustomer) realCustomer;
     }
 
     public RealCustomer retrieveRealCustomerName(String customerNumber) {
 
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("select rc.name, rc.familyName from RealCustomer rc where rc.customerNumber= :customerNumber");
-            query.setParameter("customerNumber", customerNumber);
-            List result = query.getResultList();
-            while (!result.isEmpty()) {
-                realCustomer.getName();
-                realCustomer.getFamilyName();
-            }
-        } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
-        } finally {
-            session.close();
-        }
+        Query query = session.createQuery("select rc from RealCustomer rc, Customer c  where rc.id = c.id and c.customerNumber= :customerNumber");
+        query.setParameter("customerNumber", customerNumber);
+        RealCustomer realCustomer = (RealCustomer) query.getSingleResult();
         return realCustomer;
+
     }
 }

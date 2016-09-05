@@ -1,7 +1,12 @@
 package ir.dotin.business;
 
+import ir.dotin.dataaccess.LoanTypeDAO;
+import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.InvalidEntranceException;
+import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.exception.NullRequiredFieldException;
+
+import java.util.List;
 
 public class LoanTypeLogic {
 
@@ -13,9 +18,16 @@ public class LoanTypeLogic {
         if (interestRate == null) {
             throw new NullRequiredFieldException("پر کردن فیلد نرخ سود الزامی است");
         }
-        if (interestRate >= 100) {
+        if (interestRate > 100) {
             throw new InvalidEntranceException("نرخ سود باید کمتر از ۱۰۰ درصد باشد");
         }
         return true;
+    }
+
+    public static List<LoanType> retrieveLoanTypes() throws NotFoundDataException {
+
+        LoanTypeDAO loanTypeDAO = new LoanTypeDAO();
+        List<LoanType> loanTypes = loanTypeDAO.retrieveLoanTypes();
+        return loanTypes;
     }
 }

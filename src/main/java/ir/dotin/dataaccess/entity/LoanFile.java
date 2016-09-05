@@ -10,7 +10,7 @@ public class LoanFile {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
-    private int loanFileId;
+    private Integer loanFileId;
 
     @ManyToOne
     private RealCustomer realCustomer;
@@ -19,12 +19,12 @@ public class LoanFile {
     private LoanType loanType;
 
     @Column(name = "duration", nullable = false)
-    private int duration;
+    private Integer duration;
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    public int getLoanFileId() {
+    public Integer getLoanFileId() {
         return loanFileId;
     }
 
@@ -36,7 +36,7 @@ public class LoanFile {
         return loanType;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
@@ -44,7 +44,7 @@ public class LoanFile {
         return amount;
     }
 
-    public void setLoanFileId(int loanFileId) {
+    public void setLoanFileId(Integer loanFileId) {
         this.loanFileId = loanFileId;
     }
 
@@ -56,7 +56,7 @@ public class LoanFile {
         this.loanType = loanType;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 

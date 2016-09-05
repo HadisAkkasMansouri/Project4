@@ -10,7 +10,7 @@ public class LoanType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "loan_type_name", unique = true, nullable = false)
     private String loanTypeName;
@@ -37,7 +37,7 @@ public class LoanType {
         this.interestRate = interestRate;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -53,7 +53,7 @@ public class LoanType {
         return grantConditions;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

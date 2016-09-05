@@ -9,16 +9,16 @@ public class GrantCondition {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "id", unique = true, nullable = false)
-    private int grantConditionId;
+    private Integer grantConditionId;
 
     @Column(name = "grant_condition_name", nullable = false)
     private String grantConditionName;
 
     @Column(name = "minimum_duration", nullable = false)
-    private int minDuration;
+    private Integer minDuration;
 
     @Column(name = "maximum_duration", nullable = false)
-    private int maxDuration;
+    private Integer maxDuration;
 
     @Column(name = "minimum_amount", nullable = false)
     private BigDecimal minAmount;
@@ -27,7 +27,7 @@ public class GrantCondition {
     private BigDecimal maxAmount;
 
     @Column(name = "loan_type_id")
-    private int loanTypeId;
+    private Integer loanTypeId;
 
     public GrantCondition(){}
 
@@ -39,7 +39,7 @@ public class GrantCondition {
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
     }
-    public int getGrantConditionId() {
+    public Integer getGrantConditionId() {
         return grantConditionId;
     }
 
@@ -47,11 +47,11 @@ public class GrantCondition {
         return grantConditionName;
     }
 
-    public int getMinDuration() {
+    public Integer getMinDuration() {
         return minDuration;
     }
 
-    public int getMaxDuration() {
+    public Integer getMaxDuration() {
         return maxDuration;
     }
 
@@ -63,11 +63,11 @@ public class GrantCondition {
         return maxAmount;
     }
 
-    public int getLoanTypeId() {
+    public Integer getLoanTypeId() {
         return loanTypeId;
     }
 
-    public void setGrantConditionId(int grantConditionId) {
+    public void setGrantConditionId(Integer grantConditionId) {
         this.grantConditionId = grantConditionId;
     }
 
@@ -75,11 +75,11 @@ public class GrantCondition {
         this.grantConditionName = grantConditionName;
     }
 
-    public void setMinDuration(int minDuration) {
+    public void setMinDuration(Integer minDuration) {
         this.minDuration = minDuration;
     }
 
-    public void setMaxDuration(int maxDuration) {
+    public void setMaxDuration(Integer maxDuration) {
         this.maxDuration = maxDuration;
     }
 
@@ -91,7 +91,7 @@ public class GrantCondition {
         this.maxAmount = maxAmount;
     }
 
-    public void setLoanTypeId(int loanTypeId) {
+    public void setLoanTypeId(Integer loanTypeId) {
         this.loanTypeId = loanTypeId;
     }
 }

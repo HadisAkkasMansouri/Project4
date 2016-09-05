@@ -5,6 +5,7 @@ import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
 import ir.dotin.exception.NullRequiredFieldException;
+
 import java.util.List;
 
 public class RealCustomerLogic {
@@ -33,7 +34,7 @@ public class RealCustomerLogic {
         }
         return true;
 
-}
+    }
 
     public static RealCustomer insertRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode) throws DuplicateEntranceException {
 
@@ -42,14 +43,17 @@ public class RealCustomerLogic {
         return realCustomer;
     }
 
-    public static RealCustomer validateUpdateRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode, String customerNumber) throws InvalidEntranceException, DuplicateEntranceException {
+    public static RealCustomer validateUpdateRealCustomer(String name, String familyName, String fatherName, String birthDate, String nationalCode, String customerNumber) throws Exception {
+
+
+        if (nationalCode.length() != 10) {
+            throw new InvalidEntranceException("کد ملی وارد شده صحیح نمی باشد لطفا مجددا تلاش نمایید");
+        }
 
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
-        if (nationalCode.length() == 10) {
-            RealCustomer realCustomer = realCustomerDAO.updateRealCustomer(name, familyName, fatherName, birthDate, nationalCode, customerNumber);
-            return realCustomer;
-        }
-        throw new InvalidEntranceException("کد ملی وارد شده صحیح نمی باشد لطفا مجددا تلاش نمایید");
+        RealCustomer realCustomer = realCustomerDAO.updateRealCustomer(name, familyName, fatherName, birthDate, nationalCode, customerNumber);
+        return realCustomer;
+
     }
 
     public static boolean deleteRealCustomer(int id) {
@@ -69,14 +73,14 @@ public class RealCustomerLogic {
         return realCustomers;
     }
 
-    public static RealCustomer getRealCustomer(int id) {
+    public static RealCustomer getRealCustomer(int id) throws Exception {
 
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
         RealCustomer realCustomer = realCustomerDAO.getRealCustomer(id);
         return realCustomer;
     }
 
-    public static RealCustomer getRealCustomerInfo(String customerNumber) {
+    public static RealCustomer getRealCustomerInfo(String customerNumber) throws Exception {
 
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
         RealCustomer realCustomer = realCustomerDAO.retrieveRealCustomerName(customerNumber);

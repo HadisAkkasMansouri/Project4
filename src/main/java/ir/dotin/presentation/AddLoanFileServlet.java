@@ -53,6 +53,8 @@ public class AddLoanFileServlet extends HttpServlet {
             request.setAttribute("loanTypeAvailability", loanTypeAvailability);
             request.setAttribute("loanTypes", loanTypes);
         } catch (Exception e) {
+            request.setAttribute("customerAvailability", 0);
+            request.setAttribute("loanTypeAvailability", false);
             e.printStackTrace();
         }
         try {

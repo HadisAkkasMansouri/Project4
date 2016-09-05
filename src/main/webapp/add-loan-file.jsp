@@ -1,7 +1,6 @@
 <%@ page import="ir.dotin.dataaccess.entity.RealCustomer" %>
 <%@ page import="ir.dotin.dataaccess.entity.LoanType" %>
 <%@ page import="java.util.List" %>
-<%@ page import="static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="fa">
 <head>
@@ -91,7 +90,7 @@
 </head>
 <body>
 <h1 class="capitalize">تشکیل پرونده تسهیلاتی</h1>
-<div class=title>
+<div>
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
@@ -100,23 +99,25 @@
     <input class="text" type="text" name="customerNumber" id="customerNumber" placeholder="شماره مشتری حقیقی"
            required=required
            oninvalid="alert('وارد کردن شماره مشتری الزامی است')" value="<%=request.getAttribute("customerNumber")%>">
-    <input class="button" type="button" value="بازیابی">
+    <input class="button" type="submit" value="بازیابی">
 </form>
+<br>
+<br>
     <form action="/AddLoanFileServlet">
-    <% int customerAvailability = (int) request.getAttribute("customerAvailability");%>
-    <% if (customerAvailability == 1) {%>
+    <%int customerAvailability = (int) request.getAttribute("customerAvailability");%>
+    <%if (customerAvailability == 1) {%>
     <input type="text" name="action" value="addLoanFile" hidden>
-    <% RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");%>
+    <%RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");%>
     <input type="text" name="customerNumber" hidden value="<%=request.getAttribute("customerNumber")%>">
     <table>
         <tr>
             <td>انواع تسهیلات</td>
             <td>
-                <% boolean loanTypeAvailability = (boolean) request.getAttribute("loanTypeAvailability");%>
-                <% if (loanTypeAvailability) {%>
-                <% List<LoanType> loanTypes = (List<LoanType>) request.getAttribute("loanTypes");%>
+                <%boolean loanTypeAvailability = (boolean) request.getAttribute("loanTypeAvailability");%>
+                <%if (loanTypeAvailability) {%>
+                <%List<LoanType> loanTypes = (List<LoanType>) request.getAttribute("loanTypes");%>
                 <select class="dropDown" name="dropDownLoanType">
-                    <% for (LoanType loanType : loanTypes) {%>
+                    <%for (LoanType loanType : loanTypes){%>
                     <option value="<%=loanType.getId()%>"><%=loanType.getLoanTypeName()%>
                     </option>
                     <%}%>
@@ -149,7 +150,7 @@
     </table>
     <input type="submit" class="finalButton" value="ثبت نهایی">
     <%}%>
-    <% if (customerAvailability == 0) {%>
+    <%if(customerAvailability == 0){%>
     <p class="textError">مشتری با شماره مشتری وارد شده یافت نشد</p>
     <%}%>
 </form>

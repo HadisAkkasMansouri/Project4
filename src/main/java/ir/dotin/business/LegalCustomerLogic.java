@@ -36,7 +36,7 @@ public class LegalCustomerLogic {
         }
     }
 
-    public static LegalCustomer validateUpdateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber) throws InvalidEntranceException, DuplicateEntranceException {
+    public static LegalCustomer validateUpdateLegalCustomer(String companyName, String economicCode, String registrationDate, String customerNumber) throws Exception {
 
         LegalCustomerDAO legalCustomerDAO = new LegalCustomerDAO();
         if (economicCode.length() == 10) {

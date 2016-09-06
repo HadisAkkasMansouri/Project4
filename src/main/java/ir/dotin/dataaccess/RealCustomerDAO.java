@@ -209,7 +209,7 @@ public class RealCustomerDAO extends Customer {
         }
     }
 
-    public RealCustomer retrieveRealCustomerName(String customerNumber) {
+    public RealCustomer retrieveRealCustomerName(String customerNumber) throws NotFoundDataException {
 
         Session session = SessionConnection.getSessionConnection().openSession();
         RealCustomer realCustomer = new RealCustomer();
@@ -221,6 +221,7 @@ public class RealCustomerDAO extends Customer {
         }catch (Exception e){
             LoggerUtil.getLogger().info("The real customer has not been retrieved with mentioned customer number!");
             e.printStackTrace();
+            throw new NotFoundDataException("کاربر گرامی٬ مشتری حقیقی با شماره مشتری وارد شده یافت نشد");
         }finally {
             session.close();
             LoggerUtil.getLogger().info("Session is closed!");

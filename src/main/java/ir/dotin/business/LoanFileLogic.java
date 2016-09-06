@@ -21,6 +21,17 @@ public class LoanFileLogic {
         }
     }
 
+    public static boolean insertLoanFile(String customerNumber, Integer loanTypeId, LoanFile loanFile) throws NotFoundDataException, NotInRangeException {
+
+        LoanFileDAO loanFileDAO = new LoanFileDAO();
+        if (validateLoanFileGrantConditions(loanFile, loanTypeId)) {
+            loanFileDAO.insertLoanFile(customerNumber, loanTypeId, loanFile);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean validateLoanFileGrantConditions(LoanFile loanFile, Integer loanTypeId) throws NotFoundDataException, NotInRangeException {
 
         GrantConditionDAO grantConditionDAO = new GrantConditionDAO();
@@ -33,13 +44,5 @@ public class LoanFileLogic {
             }
         }
         return true;
-    }
-
-    public static void insertLoanFile(String customerNumber, Integer loanTypeId, LoanFile loanFile) throws NotFoundDataException, NotInRangeException {
-
-        LoanFileDAO loanFileDAO = new LoanFileDAO();
-        if(validateLoanFileGrantConditions(loanFile, loanTypeId)){
-          loanFileDAO.insertLoanFile(customerNumber, loanTypeId, loanFile);
-        }
     }
 }

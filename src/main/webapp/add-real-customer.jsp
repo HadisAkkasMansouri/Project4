@@ -75,7 +75,7 @@
     </fieldset>
 </form>
 <div>
-    <td><a href="/index.jsp" class="form">صفحه قبل <<</a></td>
+    <td><a href="/real-customer.jsp" class="form">صفحه قبل <<</a></td>
 </div>
 <script>
     function validation() {

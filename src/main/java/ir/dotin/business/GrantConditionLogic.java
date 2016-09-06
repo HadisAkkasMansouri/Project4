@@ -38,11 +38,14 @@ public class GrantConditionLogic {
         return true;
     }
 
-    public static void insertGrandConditionByLoanType(LoanType loanType, List<GrantCondition> grantConditions) throws NullRequiredFieldException, NotInRangeException {
+    public static boolean insertGrandConditionByLoanType(LoanType loanType, List<GrantCondition> grantConditions) throws NullRequiredFieldException, NotInRangeException {
 
         if(validateGrantCondition(grantConditions)){
             GrantConditionDAO grantConditionDAO = new GrantConditionDAO();
             grantConditionDAO.insertGrantConditionByLoanType(loanType, grantConditions);
+            return true;
+        }else {
+            return false;
         }
     }
 }

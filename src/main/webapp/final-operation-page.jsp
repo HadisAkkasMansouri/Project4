@@ -19,8 +19,6 @@
             font-size: 3.8em;
             color: cornsilk;
             text-align: right;
-            line-height: 2.8;
-            top: 7%;
             margin-right: 3cm;
         }
 
@@ -34,16 +32,16 @@
         }
 
         .text{
+            font-size: 2.0em;
             font-weight: bold;
             color: darkgoldenrod;
             text-align: right;
-            font-size: 2.0em;
             margin-right: 3cm;
             line-height: 1.8;
         }
 
     </style>
-    <h class="capitalize"><%=request.getAttribute("header") == null ? "": (String)request.getAttribute("header")%></h>
+    <h1 class="capitalize"><%=request.getAttribute("header") == null ? "": (String)request.getAttribute("header")%></h1>
     <p class="text"><%=request.getAttribute("text") == null ? "": (String)request.getAttribute("text")%></p>
 </head>
 <body>

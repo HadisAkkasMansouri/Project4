@@ -5,6 +5,7 @@ import ir.dotin.dataaccess.entity.GrantCondition;
 import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotInRangeException;
 import ir.dotin.exception.NullRequiredFieldException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,8 @@ public class AddGrantConditionServlet extends HttpServlet {
         try {
             if (GrantConditionLogic.validateGrantCondition(grantConditions)) {
                 GrantConditionLogic.insertGrandConditionByLoanType(loanType, grantConditions);
-                request.setAttribute("text", "عملیات ثبت نوع تسهیلات " +"\""+ loanTypeName +"\"" + " با شروط اعطا وارد شده با موفقیت انجام پذیرفت");
+                request.setAttribute("header", "ثبت نهایی نوع تسهیلات");
+                request.setAttribute("text", "عملیات ثبت نوع تسهیلات " + "\"" + loanTypeName + "\"" + " با شروط اعطا وارد شده با موفقیت انجام پذیرفت");
                 getServletConfig().getServletContext().getRequestDispatcher("/final-operation-page.jsp").forward(request, response);
             }
         } catch (NullRequiredFieldException | NotInRangeException e) {

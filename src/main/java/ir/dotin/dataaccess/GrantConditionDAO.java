@@ -49,7 +49,7 @@ public class GrantConditionDAO {
             LoggerUtil.getLogger().info("The retrieval of grant condition has been done successfully.");
             return grantConditions;
         } catch (Exception e) {
-            LoggerUtil.getLogger().warn("The retrieval of grant condition has been faced with error!");
+            LoggerUtil.getLogger().warn("The retrieval of grant condition has been faced with an error!");
             e.printStackTrace();
             throw new NotFoundDataException("بازیابی شروط اعطا با خطا مواجه شد!");
         } finally {

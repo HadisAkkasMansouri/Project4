@@ -53,7 +53,7 @@
 
         .button {
             position: absolute;
-            right: 22%;
+            right: 20%;
             top: 29.7%;
             text-align: center;
             font-weight: bold;
@@ -76,8 +76,8 @@
             color: brown;
             font-family: "B Nazanin";
             position: absolute;
-            right: 22%;
-            top: 80%;
+            right: 20%;
+            top: 70%;
 
         }
 
@@ -86,20 +86,29 @@
             color: darkgoldenrod;
             font-weight: bold;
             font-family: "B Nazanin";
+            position: absolute;
+            right:45%;
+            top: 1%;
+        }
+
+        .loanTypeTable{
+            color: darkgoldenrod;
+            font-weight: bold;
+            font-family: "B Nazanin";
+            position: absolute;
+            right:10%;
+            top:40%;
+
         }
 
     </style>
 </head>
 <body>
 <h1 class="capitalize">تشکیل پرونده تسهیلاتی</h1>
-<div>
-    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
-    </p>
-</div>
 <form action="/AddLoanFileServlet">
-    <h4 class="header">لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</h4>
+    <h4 class="header">:لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</h4>
     <input type="hidden" value="retrieveCustomerAndLoanType" name="action">
-    <input class="text" type="text" name="customerNumber" id="customerNumber" placeholder="شماره مشتری حقیقی"
+        <input class="text" type="text" name="customerNumber" id="customerNumber" placeholder="شماره مشتری حقیقی"
            required=required
            oninvalid="alert('وارد کردن شماره مشتری الزامی است')" value="<%=request.getAttribute("customerNumber")%>">
     <input class="button" type="submit" value="بازیابی">
@@ -122,7 +131,7 @@
     </div>
     <div style="width: 100%; direction: rtl;">
 
-        <table style="color: darkgoldenrod;">
+        <table class="loanTypeTable">
             <tr>
                 <td>انواع تسهیلات</td>
                 <td>
@@ -141,12 +150,12 @@
                 </td>
             </tr>
             <tr>
-                <td>نام مشتری حقیقی</td>
+                <td>نام مشتری</td>
                 <td><%=realCustomer.getName()%>
                 </td>
             </tr>
             <tr>
-                <td>نام خانوادگی مشتری حقیقی</td>
+                <td>نام خانوادگی مشتری</td>
                 <td><%=realCustomer.getFamilyName()%>
                 </td>
             </tr>
@@ -164,7 +173,7 @@
     </div>
     <input type="submit" class="finalButton" value="ثبت نهایی">
     <%} else if (customerAvailability == 0) {%>
-    <p class="textError">مشتری با شماره مشتری وارد شده یافت نشد</p>
+    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     <%}%>
 </form>
 <form action="/AddLoanFileServlet">

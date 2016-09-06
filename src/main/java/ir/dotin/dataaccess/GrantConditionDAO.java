@@ -5,9 +5,12 @@ import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.utility.LoggerUtil;
 import ir.dotin.utility.SessionConnection;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
+
 import java.util.List;
 
 public class GrantConditionDAO {
@@ -46,6 +49,9 @@ public class GrantConditionDAO {
             Query query = session.createQuery("select gc from GrantCondition gc where gc.loanTypeId= :loanTypeId");
             query.setParameter("loanTypeId", loanTypeId);
             grantConditions = query.getResultList();
+//            Criteria criteria = session.createCriteria(GrantCondition.class);
+//            criteria.add(Restrictions.eq("loanTypeId", loanTypeId));
+//            grantConditions = criteria.list();
             LoggerUtil.getLogger().info("The retrieval of grant condition has been done successfully.");
             return grantConditions;
         } catch (Exception e) {

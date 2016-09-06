@@ -63,7 +63,7 @@
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
-<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit=" return validation()">
+<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit="validation()">
     <fieldset>
         <legend>لطفا اطلاعات نوع تسهیلات را وارد نمایید</legend>
         نام نوع تسهیلات <br>

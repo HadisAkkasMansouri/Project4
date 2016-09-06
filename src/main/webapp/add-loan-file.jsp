@@ -110,7 +110,7 @@
     <input type="hidden" value="retrieveCustomerAndLoanType" name="action">
         <input class="text" type="text" name="customerNumber" id="customerNumber" placeholder="شماره مشتری حقیقی"
            required=required
-           oninvalid="alert('کاربر گرامی٬ وارد کردن شماره مشتری الزامی است')"%>">
+           oninvalid="alert('کاربر گرامی٬ وارد کردن شماره مشتری الزامی است')"%>
     <input class="button" type="submit" value="بازیابی">
 </form>
 <br>

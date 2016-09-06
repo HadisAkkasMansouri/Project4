@@ -39,6 +39,7 @@ public class GrantCondition {
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
     }
+
     public Integer getGrantConditionId() {
         return grantConditionId;
     }

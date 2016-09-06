@@ -16,7 +16,7 @@ public class LoanType {
     private String loanTypeName;
 
     @Column(name = "interest_rate", nullable = false)
-    private float interestRate;
+    private Float interestRate;
 
 
     @OneToMany(cascade = {CascadeType.ALL})
@@ -45,7 +45,7 @@ public class LoanType {
         return loanTypeName;
     }
 
-    public float getInterestRate() {
+    public Float getInterestRate() {
         return interestRate;
     }
 
@@ -61,7 +61,7 @@ public class LoanType {
         this.loanTypeName = loanTypeName;
     }
 
-    public void setInterestRate(float interestRate) {
+    public void setInterestRate(Float interestRate) {
         this.interestRate = interestRate;
     }
 

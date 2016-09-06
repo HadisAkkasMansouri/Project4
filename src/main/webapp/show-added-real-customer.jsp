@@ -34,16 +34,17 @@
         }
 
         .table {
-            color: #fff8dc  ;
+            color: #fff8dc;
             background-color: #b8860b;
             position: absolute;
-            right:7%;
-            top:40%;
+            right: 7%;
+            top: 40%;
             text-align: right;
             font-weight: bold;
             font-family: B Nazanin;
             vertical-align: middle;
             border-bottom: 1px solid #fff8dc;
+            direction: rtl;
         }
     </style>
 </head>
@@ -60,49 +61,60 @@
                 <%
                     RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");
                 %>
-                <h1 class="capitalize">مشتری حقیقی به شرح زیر با موفقیت٬ ذخیره شد</h1>
+                <h1 class="capitalize">مشتری حقیقی به شرح زیر٬ با موفقیت ذخیره شد</h1>
                 <table class="table">
                     <thead>
                     <tr>
                         <th>
-                            شماره مشتری
+                        <td> شماره مشتری</td>
                         </th>
                         <th>
-                            نام
+                        <td>نام</td>
                         </th>
                         <th>
-                            نام خانوادگی
+                        <td>نام خانوادگی</td>
                         </th>
                         <th>
-                            نام پدر
+                        <td>نام پدر</td>
                         </th>
                         <th>
-                            تاریخ تولد
+                        <td>تاریخ تولد</td>
                         </th>
                         <th>
-                            کد ملی
+                        <td>کد ملی</td>
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <%=realCustomer.getCustomerNumber()%>
+                        <td><%=realCustomer.getCustomerNumber()%>
                         </td>
+                        </td>
+                        <td>
                         <td>
                             <%=realCustomer.getName()%>
                         </td>
+                        </td>
+                        <td>
                         <td>
                             <%=realCustomer.getFamilyName()%>
                         </td>
+                        </td>
+                        <td>
                         <td>
                             <%=realCustomer.getFatherName()%>
                         </td>
+                        </td>
+                        <td>
                         <td>
                             <%=realCustomer.getBirthDate()%>
                         </td>
+                        </td>
+                        <td>
                         <td>
                             <%=realCustomer.getNationalCode()%>
+                        </td>
                         </td>
                     </tr>
                     </tbody>

@@ -8,7 +8,7 @@
             var loanTypeName = document.getElementById("loanTypeName").value;
             var interestRate = document.getElementById("interestRate").value;
             if(loanTypeName == "" || interestRate == ""){
-                alert("پر کردن تمامی فیلد های انواع تسهیلات الزامی است !");
+                alert("کاربر گرامی٬ پر کردن تمامی فیلد های انواع تسهیلات الزامی است !");
             }
         }
     </script>
@@ -65,12 +65,12 @@
 </div>
 <form class="add" action="/AddLoanTypeServlet" method="get" onsubmit=" return validation()">
     <fieldset>
-        <legend>لطفا اطلاعات نوع تسهیلات کاربر حقیقی را وارد نمایید</legend>
+        <legend>لطفا اطلاعات نوع تسهیلات را وارد نمایید</legend>
         نام نوع تسهیلات <br>
-        <input type="text" name="loanTypeName" id="loanTypeName" placeholder="نام نوع تسهیلات">
+        <input type="text" name="loanTypeName" id="loanTypeName">
         <br>
         نرخ سود <br>
-        <input type="text" name="interestRate" id="interestRate" placeholder="نرخ سود">
+        <input type="text" name="interestRate" id="interestRate">
         <br><br>
         <button type="submit" value="registrationInformation"><b>اضافه کردن شرایط اعطا</b></button>
     </fieldset>

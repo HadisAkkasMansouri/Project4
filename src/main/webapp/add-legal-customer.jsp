@@ -56,14 +56,11 @@
         تاریخ ثبت    <br>
         <input type="text" name="RegistrationDate">
         <br><br>
-        <button type="submit" value="RegistrateInformation"><b>ثبت اطاعات</b></button>
+        <button type="submit" value="RegisterInformation"><b>ثبت اطاعات</b></button>
     </fieldset>
 </form>
 <div>
     <td><a href="../index.jsp" class="form">صفحه قبل <<</a></td>
 </div>
-<script>
-
-</script>
 </body>
 </html>

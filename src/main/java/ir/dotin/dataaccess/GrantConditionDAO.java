@@ -7,7 +7,7 @@ import ir.dotin.utility.LoggerUtil;
 import ir.dotin.utility.SessionConnection;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import javax.persistence.Query;
+import org.hibernate.Query;
 import java.util.List;
 
 public class GrantConditionDAO {

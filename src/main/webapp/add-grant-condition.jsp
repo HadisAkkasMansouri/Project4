@@ -12,7 +12,7 @@
             var minAmount = document.getElementById("minAmount").value;
             var maxAmount = document.getElementById("maxAmount").value;
             if (grantConditionName == "" || minAmount == "" || maxAmount == "" || minDuration == "" || maxDuration == "") {
-                alert("پر کردن تمامی فیلدهای شروط اعطا الزامی است !");
+                alert("کاربر گرامی٬ پر کردن تمامی فیلدهای شروط اعطا الزامی است !");
             } else {
                 addRowTable();
             }

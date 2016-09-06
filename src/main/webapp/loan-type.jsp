@@ -63,14 +63,14 @@
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
-<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit="return validation()">
+<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit=" return validation()">
     <fieldset>
         <legend>لطفا اطلاعات نوع تسهیلات کاربر حقیقی را وارد نمایید</legend>
         نام نوع تسهیلات <br>
-        <input type="text" name="loanTypeName" id="loanTypeName">
+        <input type="text" name="loanTypeName" id="loanTypeName" placeholder="نام نوع تسهیلات">
         <br>
         نرخ سود <br>
-        <input type="text" name="interestRate" id="interestRate">
+        <input type="text" name="interestRate" id="interestRate" placeholder="نرخ سود">
         <br><br>
         <button type="submit" value="registrationInformation"><b>اضافه کردن شرایط اعطا</b></button>
     </fieldset>

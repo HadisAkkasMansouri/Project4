@@ -2,6 +2,8 @@ package ir.dotin.dataaccess;
 
 import ir.dotin.dataaccess.entity.LegalCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
+import ir.dotin.exception.NotFoundDataException;
+import ir.dotin.utility.LoggerUtil;
 import ir.dotin.utility.SessionConnection;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -15,23 +17,19 @@ public class LegalCustomerDAO {
 
     public boolean checkUniqueLegalEconomicCode(String economicCode) throws DuplicateEntranceException {
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
         try {
             Query query = session.createQuery("select lc from LegalCustomer lc where lc.economicCode= :economicCode");
             System.out.println(query);
             query.setParameter("economicCode", economicCode);
             Object result = query.getSingleResult();
-            transaction.commit();
             if (result != null) {
                 throw new DuplicateEntranceException("کد اقتصادی وارد شده یکتا نیست٬ لطفا مجددا تلاش نمایید");
             }
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
                 e.printStackTrace();
-            }
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
         return true;
     }
@@ -56,6 +54,7 @@ public class LegalCustomerDAO {
             }
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
         return legalCustomer;
     }
@@ -79,6 +78,7 @@ public class LegalCustomerDAO {
             }
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
         return true;
     }
@@ -86,7 +86,6 @@ public class LegalCustomerDAO {
     public Query buildLegalCustomerQuery(String companyName, String economicCode, String customerNumber) {
 
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
         Query query = null;
         int counter = 1;
         StringBuilder queryString = new StringBuilder("select from LegalCustomer lc, Customer c where lc.id = c.id and ");
@@ -110,13 +109,13 @@ public class LegalCustomerDAO {
                 query.setParameter(counter, parameter);
                 counter++;
             }
+            LoggerUtil.getLogger().info("The query of Legal customer has been done successfully.");
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
+            LoggerUtil.getLogger().info("The query of Legal customer has not been done!");
+            e.printStackTrace();
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
         return query;
     }
@@ -125,21 +124,19 @@ public class LegalCustomerDAO {
 
         List<LegalCustomer> result = new ArrayList<LegalCustomer>();
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction = null;
         try {
             Query query = buildLegalCustomerQuery(companyName, economicCode, legalCustomerNumber);
             List<LegalCustomer> legalCustomers = query.getResultList();
-            transaction.commit();
             for (LegalCustomer legalCustomer : legalCustomers) {
                 result.add(legalCustomer);
             }
+            LoggerUtil.getLogger().info("The retrieval of legal customers have been successfully.");
         } catch (HibernateException e) {
-            if (transaction != null) {
-                transaction.rollback();
-                e.printStackTrace();
-            }
+            LoggerUtil.getLogger().info("The retrieval of legal customers have not been!");
+            e.printStackTrace();
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
         return result;
     }
@@ -150,6 +147,7 @@ public class LegalCustomerDAO {
         Session session = SessionConnection.getSessionConnection().openSession();
         Transaction transaction = null;
         try {
+            transaction = session.beginTransaction();
             Query query = session.createQuery("update LegalCustomer lc set lc.companyName= :companyName, lc.economicCode= :economicCode, lc.registrationDate= : registrationDate" +
                     " where lc.id= :id");
             query.setParameter("companyName", companyName);
@@ -158,27 +156,39 @@ public class LegalCustomerDAO {
             query.setParameter("id", id);
             query.executeUpdate();
             transaction.commit();
+            LoggerUtil.getLogger().info("The legal customer has been updated successfully.");
             return new LegalCustomer(customerNumber, companyName, economicCode, registrationDate);
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
+                LoggerUtil.getLogger().warn("The legal customer has not been updated!");
                 e.printStackTrace();
             }
             throw new Exception("عملیات اصلاح موفقیت آمیز نبود!");
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
     }
 
 
-    public LegalCustomer getLegalCustomer(int id) {
+    public LegalCustomer getLegalCustomer(int id) throws NotFoundDataException {
 
         Session session = SessionConnection.getSessionConnection().openSession();
-        Query query = session.createQuery("select lc from LegalCustomer lc where lc.id= :id");
-        query.setParameter("id", id);
-        Object result = query.getFirstResult();
-        return (LegalCustomer) result;
-
+        try {
+            Query query = session.createQuery("select lc from LegalCustomer lc where lc.id= :id");
+            query.setParameter("id", id);
+            Object result = query.getFirstResult();
+            LoggerUtil.getLogger().info("The retrieval of legal customer by id has been done successfully.");
+            return (LegalCustomer) result;
+        }catch (Exception e){
+            LoggerUtil.getLogger().warn("The retrieval of legal customer by id has not been done!");
+            e.printStackTrace();
+            throw new NotFoundDataException("مشتری حقوقی با id مذکور یافت نشد.");
+        }finally {
+            session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
+        }
     }
 }
 

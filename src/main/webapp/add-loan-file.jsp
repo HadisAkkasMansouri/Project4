@@ -12,6 +12,7 @@
         body {
             background-color: black;
             font-family: B Nazanin;
+            color: darkgoldenrod;
         }
 
         div {
@@ -75,11 +76,12 @@
             color: brown;
             font-family: "B Nazanin";
             position: absolute;
-            right:22%;
-            top:80%;
+            right: 22%;
+            top: 80%;
 
         }
-        .dropDown{
+
+        .dropDown {
             background-color: cornsilk;
             color: darkgoldenrod;
             font-weight: bold;
@@ -94,8 +96,9 @@
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
-<form action="/AddLoanFileServlet" name="action" value="retrieveCustomerAndLoanType" hidden>
+<form action="/AddLoanFileServlet">
     <h4 class="header">لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</h4>
+    <input type="hidden" value="retrieveCustomerAndLoanType" name="action">
     <input class="text" type="text" name="customerNumber" id="customerNumber" placeholder="شماره مشتری حقیقی"
            required=required
            oninvalid="alert('وارد کردن شماره مشتری الزامی است')" value="<%=request.getAttribute("customerNumber")%>">
@@ -103,54 +106,64 @@
 </form>
 <br>
 <br>
-    <form action="/AddLoanFileServlet">
-    <%int customerAvailability = (int) request.getAttribute("customerAvailability");%>
+<form action="/AddLoanFileServlet">
+    <%
+        Object customerAvailabilityObject = request.getAttribute("customerAvailability");
+        int customerAvailability = -1;
+        if (customerAvailabilityObject != null) {
+            customerAvailability = (int) customerAvailabilityObject;
+        }
+    %>
     <%if (customerAvailability == 1) {%>
-    <input type="text" name="action" value="addLoanFile" hidden>
-    <%RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");%>
-    <input type="text" name="customerNumber" hidden value="<%=request.getAttribute("customerNumber")%>">
-    <table>
-        <tr>
-            <td>انواع تسهیلات</td>
-            <td>
-                <%boolean loanTypeAvailability = (boolean) request.getAttribute("loanTypeAvailability");%>
-                <%if (loanTypeAvailability) {%>
-                <%List<LoanType> loanTypes = (List<LoanType>) request.getAttribute("loanTypes");%>
-                <select class="dropDown" name="dropDownLoanType">
-                    <%for (LoanType loanType : loanTypes){%>
-                    <option value="<%=loanType.getId()%>"><%=loanType.getLoanTypeName()%>
-                    </option>
+    <div style="width: 100%">
+        <input type="text" name="action" value="addLoanFile" hidden>
+        <%RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");%>
+        <input type="text" name="customerNumber" hidden value="<%=request.getAttribute("customerNumber")%>">
+    </div>
+    <div style="width: 100%; direction: rtl;">
+
+        <table style="color: darkgoldenrod;">
+            <tr>
+                <td>انواع تسهیلات</td>
+                <td>
+                    <%boolean loanTypeAvailability = (boolean) request.getAttribute("loanTypeAvailability");%>
+                    <%if (loanTypeAvailability) {%>
+                    <%List<LoanType> loanTypes = (List<LoanType>) request.getAttribute("loanTypes");%>
+                    <select class="dropDown" name="loanTypeId">
+                        <%for (LoanType loanType : loanTypes) {%>
+                        <option value="<%=loanType.getId()%>"><%=loanType.getLoanTypeName()%>
+                        </option>
+                        <%}%>
+                    </select>
+                    <%} else {%>
+                    <p>هیچ تسهیلاتی موجود نمی باشد</p>
                     <%}%>
-                </select>
-                <%} else {%>
-                <p>هیچ تسهیلاتی موجود نمی باشد</p>
-                <%}%>
-            </td>
-        </tr>
-        <tr>
-            <td>نام مشتری حقیقی</td>
-            <td><%=realCustomer.getFamilyName()%>
-            </td>
-        </tr>
-        <tr>
-            <td>نام خانوادگی مشتری حقیقی</td>
-            <td><%=realCustomer.getFamilyName()%>
-            </td>
-        </tr>
-        <tr>
-            <td>مدت قرارداد</td>
-            <td><input type="text" name="duration" required="required"
-                       oninvalid="alert('وارد کردن فیلد مدت قرارداد الزامی است')"></td>
-        </tr>
-        <tr>
-            <td>مبلغ قرارداد</td>
-            <td><input type="text" name="amount" required="required"
-                       oninvalid="alert('وارد کردن فیلد مبلغ قرارداد الزامی است')"></td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>نام مشتری حقیقی</td>
+                <td><%=realCustomer.getName()%>
+                </td>
+            </tr>
+            <tr>
+                <td>نام خانوادگی مشتری حقیقی</td>
+                <td><%=realCustomer.getFamilyName()%>
+                </td>
+            </tr>
+            <tr>
+                <td>مدت قرارداد</td>
+                <td><input type="text" name="duration" required="required"
+                           oninvalid="alert('وارد کردن فیلد مدت قرارداد الزامی است')"></td>
+            </tr>
+            <tr>
+                <td>مبلغ قرارداد</td>
+                <td><input type="text" name="amount" required="required"
+                           oninvalid="alert('وارد کردن فیلد مبلغ قرارداد الزامی است')"></td>
+            </tr>
+        </table>
+    </div>
     <input type="submit" class="finalButton" value="ثبت نهایی">
-    <%}%>
-    <%if(customerAvailability == 0){%>
+    <%} else if (customerAvailability == 0) {%>
     <p class="textError">مشتری با شماره مشتری وارد شده یافت نشد</p>
     <%}%>
 </form>

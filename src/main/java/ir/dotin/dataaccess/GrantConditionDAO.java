@@ -3,6 +3,7 @@ package ir.dotin.dataaccess;
 import ir.dotin.dataaccess.entity.GrantCondition;
 import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotFoundDataException;
+import ir.dotin.utility.LoggerUtil;
 import ir.dotin.utility.SessionConnection;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -23,14 +24,17 @@ public class GrantConditionDAO {
                 session.save(grantCondition);
             }
             transaction.commit();
+            LoggerUtil.getLogger().info("The grant condition has been inserted successfully.");
         } catch (Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
+                LoggerUtil.getLogger().error("The grant condition has not been inserted!");
                 e.printStackTrace();
             }
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
     }
 
@@ -42,12 +46,15 @@ public class GrantConditionDAO {
             Query query = session.createQuery("select gc from GrantCondition gc where gc.loanTypeId= :loanTypeId");
             query.setParameter("loanTypeId", loanTypeId);
             grantConditions = query.getResultList();
+            LoggerUtil.getLogger().info("The retrieval of grant condition has been done successfully.");
             return grantConditions;
         } catch (Exception e) {
+            LoggerUtil.getLogger().warn("The retrieval of grant condition has been faced with error!");
             e.printStackTrace();
             throw new NotFoundDataException("بازیابی شروط اعطا با خطا مواجه شد!");
         } finally {
             session.close();
+            LoggerUtil.getLogger().info("Session is closed!");
         }
     }
 }

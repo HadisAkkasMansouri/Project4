@@ -4,6 +4,7 @@ import ir.dotin.dataaccess.LegalCustomerDAO;
 import ir.dotin.dataaccess.entity.LegalCustomer;
 import ir.dotin.exception.DuplicateEntranceException;
 import ir.dotin.exception.InvalidEntranceException;
+import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.exception.NullRequiredFieldException;
 import java.sql.SQLException;
 import java.util.List;
@@ -64,7 +65,7 @@ public class LegalCustomerLogic {
         return legalCustomers;
     }
 
-    public static LegalCustomer getLegalCustomer(int id) throws SQLException {
+    public static LegalCustomer getLegalCustomer(int id) throws SQLException, NotFoundDataException {
 
         LegalCustomerDAO legalCustomerDAO = new LegalCustomerDAO();
         LegalCustomer legalCustomer =  legalCustomerDAO.getLegalCustomer(id);

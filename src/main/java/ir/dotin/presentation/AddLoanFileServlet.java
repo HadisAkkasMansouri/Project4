@@ -70,12 +70,12 @@ public class AddLoanFileServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         String customerNumber = request.getParameter("customerNumber");
-        int LoanTypeId = Integer.parseInt(request.getParameter("LoanTypeId"));
+        int LoanTypeId = Integer.parseInt(request.getParameter("loanTypeId"));
         LoanFile loanFile = new LoanFile();
         loanFile.setAmount(new BigDecimal(request.getParameter("amount")));
         loanFile.setDuration(Integer.valueOf(request.getParameter("duration")));
         request.setAttribute("text", "پرونده تسهیلاتی مشتری حقیقی با شماره مشتری " + customerNumber + "با موفقیت ثبت شد.");
-        getServletConfig().getServletContext().getRequestDispatcher("/final-operation.jsp").forward(request, response);
+        getServletConfig().getServletContext().getRequestDispatcher("/final-operation-page.jsp").forward(request, response);
         try {
             LoanFileLogic.insertLoanFile(customerNumber, LoanTypeId, loanFile);
         } catch (NotFoundDataException | NotInRangeException e) {

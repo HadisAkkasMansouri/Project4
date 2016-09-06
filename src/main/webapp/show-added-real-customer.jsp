@@ -52,79 +52,72 @@
 <div class=title>
     <h>نمایش مشتری</h>
 </div>
-<div id=wrapper>
-    <div class=content>
-        <div class=box>
-            <div class=box-in>
-                <br>
-                <br>
-                <%
-                    RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");
-                %>
-                <h1 class="capitalize">مشتری حقیقی به شرح زیر٬ با موفقیت ذخیره شد</h1>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>
-                        <td> شماره مشتری</td>
-                        </th>
-                        <th>
-                        <td>نام</td>
-                        </th>
-                        <th>
-                        <td>نام خانوادگی</td>
-                        </th>
-                        <th>
-                        <td>نام پدر</td>
-                        </th>
-                        <th>
-                        <td>تاریخ تولد</td>
-                        </th>
-                        <th>
-                        <td>کد ملی</td>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                        <td><%=realCustomer.getCustomerNumber()%>
-                        </td>
-                        </td>
-                        <td>
-                        <td>
-                            <%=realCustomer.getName()%>
-                        </td>
-                        </td>
-                        <td>
-                        <td>
-                            <%=realCustomer.getFamilyName()%>
-                        </td>
-                        </td>
-                        <td>
-                        <td>
-                            <%=realCustomer.getFatherName()%>
-                        </td>
-                        </td>
-                        <td>
-                        <td>
-                            <%=realCustomer.getBirthDate()%>
-                        </td>
-                        </td>
-                        <td>
-                        <td>
-                            <%=realCustomer.getNationalCode()%>
-                        </td>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div>
-                    <td><a href="/index.jsp" class="form">صفحه قبل <<</a></td>
-                </div>
-            </div>
-        </div>
-    </div>
+<br>
+<br>
+<%
+    RealCustomer realCustomer = (RealCustomer) request.getAttribute("realCustomer");
+%>
+<h1 class="capitalize">مشتری حقیقی به شرح زیر٬ با موفقیت ذخیره شد</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+        <td> شماره مشتری</td>
+        </th>
+        <th>
+        <td>نام</td>
+        </th>
+        <th>
+        <td>نام خانوادگی</td>
+        </th>
+        <th>
+        <td>نام پدر</td>
+        </th>
+        <th>
+        <td>تاریخ تولد</td>
+        </th>
+        <th>
+        <td>کد ملی</td>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+        <td><%=realCustomer.getCustomerNumber()%>
+        </td>
+        </td>
+        <td>
+        <td>
+            <%=realCustomer.getName()%>
+        </td>
+        </td>
+        <td>
+        <td>
+            <%=realCustomer.getFamilyName()%>
+        </td>
+        </td>
+        <td>
+        <td>
+            <%=realCustomer.getFatherName()%>
+        </td>
+        </td>
+        <td>
+        <td>
+            <%=realCustomer.getBirthDate()%>
+        </td>
+        </td>
+        <td>
+        <td>
+            <%=realCustomer.getNationalCode()%>
+        </td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <td><a href="/index.jsp" class="form">صفحه قبل <<</a></td>
+
 </div>
 </body>
 </html>

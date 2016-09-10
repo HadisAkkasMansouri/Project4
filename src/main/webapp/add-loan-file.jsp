@@ -107,6 +107,7 @@
 <h1 class="capitalize">تشکیل پرونده تسهیلاتی</h1>
 <form action="/AddLoanFileServlet">
     <h4 class="header">:لطفا شماره مشتری کاربر حقیقی مورد نظر را وارد نمایید</h4>
+    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%></p>
     <input type="hidden" value="retrieveCustomerAndLoanType" name="action">
         <input class="text" type="text" name="customerNumber" id="customerNumber" placeholder="شماره مشتری حقیقی"
            required=required
@@ -145,7 +146,7 @@
                         <%}%>
                     </select>
                     <%} else {%>
-                    <p>هیچ تسهیلاتی موجود نمی باشد</p>
+                    <p style="color: crimson">هیچ تسهیلاتی موجود نمی باشد</p>
                     <%}%>
                 </td>
             </tr>
@@ -173,7 +174,7 @@
     </div>
     <input type="submit" class="finalButton" value="ثبت نهایی">
     <%} else if (customerAvailability == 0) {%>
-    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
+    <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%></p>
     <%}%>
 </form>
 <form action="/AddLoanFileServlet">

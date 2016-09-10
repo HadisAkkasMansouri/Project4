@@ -20,7 +20,6 @@ public class LoanFileDAO {
             loanFile.setLoanType(loanType);
             loanFile.setRealCustomer(realCustomer);
             session.save(loanFile);
-            session.getTransaction().commit();
             transaction.commit();
             LoggerUtil.getLogger().info("The LoanFile has been saved successfully.");
         } catch (Exception e) {
@@ -35,11 +34,10 @@ public class LoanFileDAO {
     public void insertLoanFile(String customerNumber, Integer loanTypeId, LoanFile loanFile) throws NotFoundDataException {
 
         Session session = SessionConnection.getSessionConnection().openSession();
-        Transaction transaction;
         RealCustomerDAO realCustomerDAO = new RealCustomerDAO();
         LoanType loanType;
         try {
-            transaction = session.beginTransaction();
+            Transaction transaction = session.beginTransaction();
             loanType = LoanTypeDAO.retrieveLoanType(loanTypeId);
             loanFile.setLoanType(loanType);
             RealCustomer realCustomer = realCustomerDAO.retrieveRealCustomerName(customerNumber);

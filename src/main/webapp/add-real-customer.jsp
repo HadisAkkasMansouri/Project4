@@ -94,7 +94,7 @@
         var check = parseInt(input[9]);
         var sum = 0;
         var i;
-        for (i = 0; i < 9; ++i) {
+        for (i = 0; i < 9; i++) {
             sum += parseInt(input[i]) * (10 - i);
         }
         sum %= 11;

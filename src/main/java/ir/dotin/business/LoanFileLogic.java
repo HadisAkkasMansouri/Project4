@@ -7,6 +7,8 @@ import ir.dotin.dataaccess.entity.LoanFile;
 import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.exception.NotInRangeException;
 import ir.dotin.exception.NullRequiredFieldException;
+import ir.dotin.utility.SessionConnection;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -21,28 +23,30 @@ public class LoanFileLogic {
         }
     }
 
-    public static boolean insertLoanFile(String customerNumber, Integer loanTypeId, LoanFile loanFile) throws NotFoundDataException, NotInRangeException {
+    public static void validateLoanFileGrantConditions(String customerNumber, LoanFile loanFile, Integer loanTypeId) throws NotFoundDataException, NotInRangeException {
 
-        LoanFileDAO loanFileDAO = new LoanFileDAO();
-        if (validateLoanFileGrantConditions(loanFile, loanTypeId)) {
-            loanFileDAO.insertLoanFile(customerNumber, loanTypeId, loanFile);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static boolean validateLoanFileGrantConditions(LoanFile loanFile, Integer loanTypeId) throws NotFoundDataException, NotInRangeException {
-
-        GrantConditionDAO grantConditionDAO = new GrantConditionDAO();
-        List<GrantCondition> grantConditions = grantConditionDAO.retrieveGrantConditionsByLoanTypeId(loanTypeId);
-        for (GrantCondition grantCondition : grantConditions) {
-            if (loanFile.getDuration() > grantCondition.getMaxDuration() || loanFile.getDuration() < grantCondition.getMinDuration()) {
-                throw new NotInRangeException("مدت زمان وارد شده٬ خارج از محدوده مدت زمان قرارداد می باشد لطفا مجددا تلاش نمایید.");
-            } else if ((loanFile.getAmount().compareTo(grantCondition.getMaxAmount()) <= 0) || (loanFile.getAmount().compareTo(grantCondition.getMinAmount()) <= 0)) {
-                throw new NotInRangeException("مبلغ وارد شده٬ خارج از محدوده مبلغ قرارداد می باشد لطفا مجددا تلاش نمایید.");
+        Session session = SessionConnection.getSessionConnection().openSession();
+        try{
+            GrantConditionDAO grantConditionDAO = new GrantConditionDAO();
+            List<GrantCondition> grantConditions = grantConditionDAO.retrieveGrantConditionsByLoanTypeId(loanTypeId);
+            boolean match = false;
+            for (GrantCondition grantCondition : grantConditions) {
+                if ((loanFile.getDuration() < grantCondition.getMaxDuration()) && (loanFile.getDuration() > grantCondition.getMinDuration())) {
+                    if ((loanFile.getAmount().compareTo(grantCondition.getMaxAmount()) >= 0) && (loanFile.getAmount().compareTo(grantCondition.getMinAmount()) >= 0)) {
+                        match = true;
+                        break;
+                    }
+                }
             }
+            if (match) {
+                LoanFileDAO loanFileDAO = new LoanFileDAO();
+                loanFileDAO.insertLoanFile(customerNumber, loanTypeId, loanFile);
+            } else {
+                throw new NotInRangeException("مقادیر وارد شده٬ در هیچ یک از شرایط اعطا صدق نمی کند٬ لطفا مجددا تلاش نمایید");
+            }
+        }finally {
+            session.close();
         }
-        return true;
+
     }
 }

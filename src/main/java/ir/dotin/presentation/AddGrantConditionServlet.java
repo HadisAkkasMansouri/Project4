@@ -27,7 +27,7 @@ public class AddGrantConditionServlet extends HttpServlet {
         LoanType loanType = new LoanType(loanTypeName, interestRate);
 
         int rowCount = Integer.parseInt(request.getParameter("rowCount"));
-        ArrayList<GrantCondition> grantConditions = new ArrayList<GrantCondition>();
+        ArrayList<GrantCondition> grantConditions = new ArrayList<>();
 
         for (int i = 1; i <= rowCount; i++) {
 

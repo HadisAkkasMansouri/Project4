@@ -3,14 +3,12 @@ package ir.dotin.presentation;
 import ir.dotin.business.LoanFileLogic;
 import ir.dotin.business.LoanTypeLogic;
 import ir.dotin.business.RealCustomerLogic;
-import ir.dotin.dataaccess.LoanFileDAO;
 import ir.dotin.dataaccess.entity.LoanFile;
 import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.dataaccess.entity.RealCustomer;
 import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.exception.NotInRangeException;
 import ir.dotin.exception.NullRequiredFieldException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +41,7 @@ public class AddLoanFileServlet extends HttpServlet {
     }
 
 
-    public void retrieveRealCustomerAndLoanType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void retrieveRealCustomerAndLoanType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -72,7 +70,7 @@ public class AddLoanFileServlet extends HttpServlet {
         }
     }
 
-    public void createLoanFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NullRequiredFieldException {
+    private void createLoanFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NullRequiredFieldException {
 
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -84,12 +82,13 @@ public class AddLoanFileServlet extends HttpServlet {
             loanFile.setAmount(new BigDecimal(request.getParameter("amount")));
             loanFile.setDuration(Integer.valueOf(request.getParameter("duration")));
             try {
-                LoanFileLogic.insertLoanFile(customerNumber, LoanTypeId, loanFile);
+                LoanFileLogic.validateLoanFileGrantConditions(customerNumber, loanFile, LoanTypeId);
                 request.setAttribute("header", "ثبت نهایی پرونده تسهیلاتی");
                 request.setAttribute("text", "پرونده تسهیلاتی مشتری حقیقی به شماره مشتری " + customerNumber + " با موفقیت ثبت شد");
                 getServletConfig().getServletContext().getRequestDispatcher("/final-operation-page.jsp").forward(request, response);
-            } catch (NotFoundDataException | NotInRangeException e) {
-                request.setAttribute("text", "\n" + e.getMessage());
+            } catch (NotInRangeException e) {
+                request.setAttribute("header", "عملیات ناموفق");
+                request.setAttribute("text", e.getMessage());
                 getServletConfig().getServletContext().getRequestDispatcher("/add-loan-file.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -97,7 +96,7 @@ public class AddLoanFileServlet extends HttpServlet {
         }
     }
 
-    public void createFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void createFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");

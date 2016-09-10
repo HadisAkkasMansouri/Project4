@@ -10,6 +10,9 @@
             if(loanTypeName == "" || interestRate == ""){
                 alert("کاربر گرامی٬ پر کردن تمامی فیلد های انواع تسهیلات الزامی است !");
             }
+            else {
+                document.forms[0].submit();
+            }
         }
     </script>
     <style>
@@ -63,7 +66,7 @@
     <p class="textError"><%=request.getAttribute("text") == null ? "" : (String) request.getAttribute("text")%>
     </p>
 </div>
-<form class="add" action="/AddLoanTypeServlet" method="get" onsubmit="validation()">
+<form class="add" action="/AddLoanTypeServlet" method="get">
     <fieldset>
         <legend>لطفا اطلاعات نوع تسهیلات را وارد نمایید</legend>
         نام نوع تسهیلات <br>
@@ -72,7 +75,7 @@
         نرخ سود <br>
         <input type="text" name="interestRate" id="interestRate">
         <br><br>
-        <button type="submit" value="registrationInformation"><b>اضافه کردن شرایط اعطا</b></button>
+        <input style="font-weight: bold" type="button" value="اضافه کردن شرایط اعطا" onclick="validation()">
     </fieldset>
 </form>
 <div>

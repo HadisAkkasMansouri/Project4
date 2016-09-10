@@ -5,11 +5,9 @@ import ir.dotin.dataaccess.entity.LoanType;
 import ir.dotin.exception.NotFoundDataException;
 import ir.dotin.utility.LoggerUtil;
 import ir.dotin.utility.SessionConnection;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -46,12 +44,16 @@ public class GrantConditionDAO {
         List<GrantCondition> grantConditions;
         Session session = SessionConnection.getSessionConnection().openSession();
         try {
-            Query query = session.createQuery("select gc from GrantCondition gc where gc.loanTypeId= :loanTypeId");
-            query.setParameter("loanTypeId", loanTypeId);
-            grantConditions = query.getResultList();
-//            Criteria criteria = session.createCriteria(GrantCondition.class);
-//            criteria.add(Restrictions.eq("loanTypeId", loanTypeId));
-//            grantConditions = criteria.list();
+//            Query query = session.createQuery("select gc from GrantCondition gc where gc.loanTypeId= :loanTypeId");
+//            query.setParameter("loanTypeId", loanTypeId);
+//            grantConditions = query.list();
+
+            Query queryLoanType = session.createQuery("select lt from LoanType lt where lt.id = :loanTypeId");
+            queryLoanType.setParameter("loanTypeId", loanTypeId);
+            LoanType loanType = (LoanType) queryLoanType.getSingleResult();
+            grantConditions = loanType.getGrantConditions();
+//            ((LoanType)(session.createQuery("select lt from LoanType lt where lt.id = :loanTypeId").setParameter("loanTypeId", loanTypeId).list())).getGrantConditions();
+
             LoggerUtil.getLogger().info("The retrieval of grant condition has been done successfully.");
             return grantConditions;
         } catch (Exception e) {
